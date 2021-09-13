@@ -81,7 +81,7 @@ $ git clone https://github.com/osamhack2021/WEB_SONAGI-ON_updraft
 
 - Jeong Jae hoon (jjh8501@gmail.com), Github Id: revlr
 - kook hyun ho (kookhh0827@gmail.com), Github Id: kookhh0827
-- Lee hyun su (masterpug99@gmail.com), Github Id: 
+- Lee hyun su (masterpug99@gmail.com), Github Id: masterpug99
 
 
 
