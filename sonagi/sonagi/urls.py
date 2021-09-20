@@ -23,7 +23,7 @@ urlpatterns = [
     path("api/", include("user.urls")),
     #path("api-auth/", include("rest_framework.urls")), 이건 필요없는듯
     #login, registration등 path 설정
-    path("api/rest-auth/", include("rest_auth.urls")),
+    #path("api/rest-auth/", include("rest_auth.urls")),
     # 토큰 발급 및 재발급 페이지 설정
     path('api/rest-auth/obtain_token/', obtain_jwt_token, name="obtain-jwt"),
     path('api/rest-auth/refresh_token/', refresh_jwt_token, name="refresh-jwt"),

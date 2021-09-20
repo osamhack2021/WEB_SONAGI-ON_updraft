@@ -16,7 +16,7 @@
                            <v-btn to="/login" elevation="2" color="primary">
                               로그인
                            </v-btn>
-                           <v-btn elevation="2" color="primary">
+                           <v-btn to="/signup" elevation="2" color="primary">
                               회원가입
                            </v-btn>
                         </template>

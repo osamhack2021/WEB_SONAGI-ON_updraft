@@ -39,8 +39,8 @@ export default new Vuex.Store({
     login(dispatch, loginObj) {
     // login --> 토큰 반환
       axios
-        .post(`${BACKEND_URL}/api/rest-auth/login/`, loginObj)
-        // loginObj = {email,password}를 받아온다.
+        .post(`${BACKEND_URL}/api/rest-auth/obtain_token/`, loginObj)
+        // loginObj = {id,password}를 받아온다.
         .then((res) => {
           // 접근 성공시, 토큰 값이 반환된다. (실제로는 토큰과 함께 유저 id를 받아온다.)
           // 토큰을 로컬 스토리지에 저장
@@ -60,14 +60,14 @@ export default new Vuex.Store({
     signup(dispatch, signupObj) {
       axios
         .post(`${BACKEND_URL}/api/rest-auth/registration/`, signupObj)
-        // loginObj = {email,password}
+        // loginObj = {id,email,password1, password2}
         .then((res) => {
           alert('회원가입이 성공적으로 이뤄졌습니다.');
-          router.push({ name: 'login' });
+          router.push({ name: 'Login' });
           console.log(res);
         })
         .catch(() => {
-          alert('이메일과 비밀번호를 확인하세요.');
+          alert('뭔가 입력이 잘못됨.');
         });
     },
     getMemberInfo({ commit }) {
