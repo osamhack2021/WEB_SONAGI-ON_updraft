@@ -5,7 +5,7 @@
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
+      <router-link to="/" tag="div" class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
@@ -23,7 +23,7 @@
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
           width="100"
         />
-      </div>
+      </router-link>
 
       <v-spacer></v-spacer>
 
