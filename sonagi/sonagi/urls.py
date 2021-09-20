@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #user.api의 모든 url 정보를 받아오는 path 설정 (include)
     path("api/", include("user.urls")),
-    path("api-auth/", include("rest_framework.urls")),
+    #path("api-auth/", include("rest_framework.urls")), 이건 필요없는듯
     #login, registration등 path 설정
     path("api/rest-auth/", include("rest_auth.urls")),
     # 토큰 발급 및 재발급 페이지 설정

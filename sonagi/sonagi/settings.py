@@ -139,7 +139,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # cors header setting
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:8080"
+    "https://osamhack2021-web-sonagi-on-updraft-66vr695xc4qg6-8080.githubpreview.dev"
 ]
 CORS_ALLOW_METHODS = (
     'DELETE',
@@ -190,3 +190,5 @@ JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
 }
 REST_USE_JWT = True
+
+ACCOUNT_EMAIL_VERIFICATION = "none"

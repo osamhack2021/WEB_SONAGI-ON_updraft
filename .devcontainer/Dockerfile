@@ -12,6 +12,8 @@ RUN pip install django
 RUN pip install django-rest-auth django-allauth django-rest-framework django-cors-headers djangorestframework-jwt
 
 RUN npm install -g @vue/cli
+RUN npm install --save axios
+RUN npm install vuex-persistedstate
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/

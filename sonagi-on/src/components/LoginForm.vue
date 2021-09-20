@@ -1,6 +1,6 @@
 <template>
    <v-app id="inspire">
-      <v-content>
+      <v-main>
          <v-container fluid fill-height>
             <v-layout align-center justify-center>
                <v-flex xs12 sm8 md4>
@@ -33,19 +33,25 @@
                </v-flex>
             </v-layout>
          </v-container>
-      </v-content>
+      </v-main>
    </v-app>
 </template>
 
 <script lang="ts">
+import { mapState, mapActions } from 'vuex';
 import Vue from 'vue';
 
 export default Vue.extend({
   name: 'LoginForm',
-
   data: () => ({
-     username: null,
-     password: null
+    username: null,
+    password: null,
   }),
+  computed: {
+    ...mapState(['isLogin', 'isLoginError']),
+  },
+  methods: {
+    ...mapActions(['login']),
+  },
 });
 </script>
