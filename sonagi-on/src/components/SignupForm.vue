@@ -1,4 +1,5 @@
 <template>
+   <!-- eslint-disable max-len -->
    <v-app>
       <v-main>
          <v-container fluid fill-height>

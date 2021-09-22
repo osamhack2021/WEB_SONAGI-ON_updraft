@@ -165,7 +165,9 @@ CORS_ALLOW_HEADERS = (
 
 #auth setting
 AUTH_USER_MODEL = "user.CustomUser"
+
 SITE_ID = 1
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         #'rest_framework.authentication.TokenAuthentication',
@@ -175,6 +177,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+}
+
+# 이 아래 두 코드를 통해 rest_auth에서 회원가입 시 사용하는 시리얼라이저와, 유저 디테일을 뽑아올 때 사용하는 시리얼라이즈가 바뀌게 된다.
+REST_AUTH_SERIALIZERS = {     
+    'USER_DETAILS_SERIALIZER': 'user.serializers.UserDisplaySerializer',
+}
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'user.serializers.UserRegisterSerializer',
 }
 
 JWT_AUTH = {
@@ -189,6 +199,7 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
 }
+
 REST_USE_JWT = True
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
