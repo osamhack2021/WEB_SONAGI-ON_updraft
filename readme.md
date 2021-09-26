@@ -58,11 +58,11 @@
 
 ### Server(back-end)
 
- -  
+ -  django
 
 ### Front-end
 
- -  react.js 
+ -  vue.js 
 
 ## 설치 안내 (Installation Process)
 
