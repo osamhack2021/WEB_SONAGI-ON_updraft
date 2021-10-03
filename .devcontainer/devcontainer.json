@@ -41,10 +41,10 @@
 		"ms-python.python",
 		"ms-python.vscode-pylance",
 		"batisteo.vscode-django",
-		"octref.vetur",
+		//!!"octref.vetur",
 		"vscode-icons-team.vscode-icons",
-		"jcbuisson.vue",
-		"hollowtree.vue-snippets"
+		//!!"jcbuisson.vue",
+		//!!"hollowtree.vue-snippets"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
