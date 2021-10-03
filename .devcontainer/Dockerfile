@@ -9,7 +9,7 @@ ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 RUN pip install django
-RUN pip install django-rest-auth django-allauth django-rest-framework django-cors-headers djangorestframework-jwt
+RUN pip install dj-rest-auth django-allauth django-rest-framework django-cors-headers djangorestframework-simplejwt
 
 RUN npm install -g @vue/cli
 RUN npm install --save axios

@@ -15,17 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #user.api의 모든 url 정보를 받아오는 path 설정 (include)
-    path("api/", include("user.urls")),
-    #path("api-auth/", include("rest_framework.urls")), 이건 필요없는듯
-    #login, registration등 path 설정
-    #path("api/rest-auth/", include("rest_auth.urls")),
+    #user.urls의 모든 url 정보를 받아오는 path 설정 (include)
+    path("api/user/", include("user.urls")),
     # 토큰 발급 및 재발급 페이지 설정
-    path('api/rest-auth/obtain_token/', obtain_jwt_token, name="obtain-jwt"),
-    path('api/rest-auth/refresh_token/', refresh_jwt_token, name="refresh-jwt"),
-    path("api/rest-auth/registration/", include("rest_auth.registration.urls")),
+    path('api/rest-auth/login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/rest-auth/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path("api/rest-auth/registration/", include("dj_rest_auth.registration.urls")),
+    # 소셜 로그인 페이지 설정
 ]
