@@ -19,7 +19,7 @@ User = get_user_model()
 # Create your views here.
 
 BASE_URL = getattr(settings, "BASE_URL")
-GOOGLE_CALLBACK_URI = BASE_URL + 'api/social-login/google/callback'
+GOOGLE_CALLBACK_URI = BASE_URL + 'api/user/social-login/google/callback'
 
 class CurrentUserAPIView(APIView):
     def get(self, request):
@@ -78,7 +78,7 @@ def google_login_callback(request):
         # 기존에 Google로 가입된 유저
         data = {'access_token': access_token, 'code': code}
         accept = requests.post(
-            f"{BASE_URL}api/social-login/google/login_finsh", data=data)
+            f"{BASE_URL}api/user/social-login/google/login_finish", data=data)
         accept_status = accept.status_code
         if accept_status != 200:
             return JsonResponse({'err_msg': 'failed to signin.'}, status=accept_status)
@@ -89,7 +89,7 @@ def google_login_callback(request):
         # 기존에 가입된 유저가 없으면 새로 가입
         data = {'access_token': access_token, 'code': code}
         accept = requests.post(
-            f"{BASE_URL}api/social-login/google/login_finsh", data=data)
+            f"{BASE_URL}api/user/social-login/google/login_finish", data=data)
         accept_status = accept.status_code
         if accept_status != 200:
             return JsonResponse({'err_msg': f'failed to signup {accept.text}'}, status=accept_status)
