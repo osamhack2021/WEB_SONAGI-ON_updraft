@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-secrets = json.loads(open("./secret.json").read())
+secrets = json.loads(open("./sonagi/secret.json").read())
 for key, value in secrets.items():
     setattr(sys.modules[__name__], key, value)
 
