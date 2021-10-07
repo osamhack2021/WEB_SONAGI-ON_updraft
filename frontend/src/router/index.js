@@ -14,47 +14,47 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        name: 'Dashboard',
+        name: '대시보드',
         component: Dashboard
     },
     {
         path: '/dashboard',
-        name: 'Dashboard',
+        name: '대시보드',
         component: Dashboard
     },
     {
         path: '/diary',
-        name: 'Diary',
+        name: '나의 연대기',
         component: Diary
     },
     {
         path: '/diary-write',
-        name: 'DiaryWrite',
+        name: '일기 쓰기',
         component: DiaryWrite
     },
     {
         path: '/diary-manage',
-        name: 'DiaryManage',
+        name: '일기 관리',
         component: DiaryManage
     },
     {
         path: '/calendar',
-        name: 'Calendar',
+        name: '캘린더',
         component: Calendar
     },
     {
         path: '/community',
-        name: 'Community',
+        name: '커뮤니티',
         component: Community
     },
     {
         path: '/event',
-        name: 'Event',
+        name: '공모전/행사',
         component: Event
     },
     {
         path: '/self-care',
-        name: 'SelfCare',
+        name: '자기관리',
         component: SelfCare
     },
 ]
