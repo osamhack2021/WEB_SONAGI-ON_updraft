@@ -1,26 +1,26 @@
 sonagi-on/*
 
 # front-end ignore files
-vuetify_test/.DS_Store
-vuetify_test/node_modules
+frontend/.DS_Store
+frontend/node_modules
 /dist
 
 
 # local env files
-vuetify_test/.env.local
-vuetify_test/.env.*.local
+frontend/.env.local
+frontend/.env.*.local
 
 # Log files
-vuetify_test/npm-debug.log*
-vuetify_test/yarn-debug.log*
-vuetify_test/yarn-error.log*
-vuetify_test/pnpm-debug.log*
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
 
 # Editor directories and files
-vuetify_test/.idea
-vuetify_test/.vscode
-vuetify_test/*.suo
-vuetify_test/*.ntvs*
-vuetify_test/*.njsproj
-vuetify_test/*.sln
-vuetify_test/*.sw?
+frontend/.idea
+frontend/.vscode
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
