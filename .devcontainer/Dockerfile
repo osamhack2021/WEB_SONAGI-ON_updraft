@@ -14,6 +14,7 @@ RUN pip install dj-rest-auth django-allauth django-rest-framework django-cors-he
 RUN npm install -g @vue/cli
 RUN npm install --save axios
 RUN npm install vuex-persistedstate
+RUN npm install animated-number-vue
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/
