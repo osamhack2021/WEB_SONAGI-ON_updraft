@@ -1,5 +1,4 @@
 from django.db import models
-from django.conf import settings
 
 # Create your models here.
 
@@ -15,6 +14,6 @@ class Diary(models.Model):
     email = models.EmailField(verbose_name="작성자 이메일")
     title = models.CharField(verbose_name="한줄평", max_length=100, null=False)
     content = models.CharField(verbose_name="내용", max_length=2000, null=True)
-    emotion = models.CharField(verbose_name="감정", choices=emotion_choices, null=False)
+    emotion = models.CharField(verbose_name="감정", max_length=1, choices=emotion_choices, null=False)
     write_date = models.DateField(verbose_name="작성 일자", auto_now_add=True)
     rewrite_date = models.DateField(verbose_name="최종 수정 일자", auto_now=True)

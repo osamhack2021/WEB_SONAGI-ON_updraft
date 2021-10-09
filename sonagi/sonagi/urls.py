@@ -19,13 +19,13 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #user app path
+    # user app and login related path
     path("api/user/", include("user.urls")),
-    #diary app path
+    path('api/user/login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/user/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path("api/user/registration/", include("dj_rest_auth.registration.urls")),
+    # setting app path
+    path("api/usersetting/", include("usersetting.urls")),
+    # diary app path
     path("api/diary/", include("diary.urls")),
-    # 토큰 발급 및 재발급 페이지 설정
-    path('api/rest-auth/login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/rest-auth/refresh', TokenRefreshView.as_view(), name='token_refresh'),
-    path("api/rest-auth/registration/", include("dj_rest_auth.registration.urls")),
-    # 소셜 로그인 페이지 설정
 ]

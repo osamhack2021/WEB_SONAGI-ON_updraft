@@ -24,7 +24,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             self.validated_data["email"], self.validated_data["password"]
         )
         return user
-    
+    # email validation 등 로직 추가해야 함
     def validate(self, data):
         password1 = data.get('password')
         password2 = data.get('password2')
