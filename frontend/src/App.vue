@@ -1,6 +1,6 @@
 <template>
    <!-- App.vue -->
-   <v-app>
+   <v-app class="myFont">
 
       <!-- 좌측 네비게이션 바 -->
       <v-card>
@@ -13,7 +13,7 @@
       <!-- 상단 바 -->
       <v-app-bar app class="text-h4 bold" height="80px">
          <v-row>
-            <v-col class="ma-4">
+            <v-col class="appBarFont ma-5 pl-5">
                <div>{{ $route.name }}</div>
             </v-col>
             <v-col align="right">
@@ -92,6 +92,15 @@
 </script>
 
 <style>
+   @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+
+   .myFont {
+      font-family: 'Gowun Dodum', sans-serif;
+   }
+   .appBarFont {
+      font-family: 'Song Myung', serif;
+   }
    .group {
    display: flex;
    flex: 1;
