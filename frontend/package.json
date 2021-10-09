@@ -12,9 +12,12 @@
     "animated-number-vue": "^1.0.0",
     "axios": "^0.22.0",
     "core-js": "^3.6.5",
+    "node-pre-gyp": "^0.17.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.2",
-    "vuetify": "^2.4.0"
+    "vuetify": "^2.4.0",
+    "vuex": "^3.6.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

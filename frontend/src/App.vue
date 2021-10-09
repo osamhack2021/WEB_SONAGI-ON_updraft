@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import Category from './components/Category.vue';
+   import Category from './components/Category.vue';
    import Profile from './components/Profile.vue';
    
    export default {

@@ -1,4 +1,4 @@
-sonagi-on/*
+sonagi/secret.json
 
 # front-end ignore files
 frontend/.DS_Store
@@ -24,3 +24,5 @@ frontend/*.ntvs*
 frontend/*.njsproj
 frontend/*.sln
 frontend/*.sw?
+
+frontend/yarn.lock
