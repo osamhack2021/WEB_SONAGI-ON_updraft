@@ -11,9 +11,6 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 RUN pip install django
 RUN pip install dj-rest-auth django-allauth django-rest-framework django-cors-headers djangorestframework-simplejwt
 
-# COPY sonagi/package*.json ./
-# RUN npm install
-
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/
 # RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
