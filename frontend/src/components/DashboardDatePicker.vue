@@ -6,6 +6,7 @@
       :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
       :events="functionEvents"
       show-adjacent-months
+      no-title
     ></v-date-picker>
   </div>
 </template>
