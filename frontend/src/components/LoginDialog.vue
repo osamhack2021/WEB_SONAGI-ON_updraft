@@ -31,6 +31,7 @@
                               id="password"
                               prepend-icon="lock"
                               name="password"
+                              v-model="password"
                               label="Password"
                               type="password"
                            ></v-text-field>
@@ -38,7 +39,7 @@
                      </v-card-text>
                      <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" to="/">Login</v-btn>
+                        <v-btn color="primary" @click="login({email, password})">Login</v-btn>
                      </v-card-actions>
                   </v-card>
     </v-dialog>
@@ -46,25 +47,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
-   name: 'Login',
-   props: {
-      source: String,
-   },
+  name: 'Login',
+  props: {
+    source: String,
+  },
+  data: () => ({
+    dialog: false,
+    emailRules: [
+      v => !!v || 'E-mail is required',
+      v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+    ],
+  }),
+  methods: {
+    ...mapActions(['login']),
+  },
 };
 </script>
 
 <style></style>
-
-
-<script>
-  export default {
-    data: () => ({
-      dialog: false,
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
-    }),
-  }
-</script>
