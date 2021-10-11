@@ -56,6 +56,6 @@ export const store = new Vuex.Store({
           // todo : signup은 Register.vue에 넣자. 왜? -> 잘못된 입력에 대해서 응답으로 온 에러를 alert 말고 입력칸 위에 빨갛게 띄워주는게 나을듯. 어차피 commit도 안함.
           alert('에러');
         });
-    },
+      },
   },
 });

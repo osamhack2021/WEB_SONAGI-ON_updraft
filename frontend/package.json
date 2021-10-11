@@ -10,10 +10,12 @@
   "dependencies": {
     "@mdi/js": "^6.2.95",
     "animated-number-vue": "^1.0.0",
+    "apexcharts": "^3.28.3",
     "axios": "^0.22.0",
     "core-js": "^3.6.5",
     "node-pre-gyp": "^0.17.0",
     "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.2",
     "vue-router": "^3.5.2",
     "vuetify": "^2.4.0",
     "vuex": "^3.6.2",
