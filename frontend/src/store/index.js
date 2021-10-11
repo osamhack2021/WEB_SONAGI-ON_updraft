@@ -14,24 +14,17 @@ export default new Vuex.Store({
   ],
   state: {
     userInfo: {
+     // days : ["2020-06-08","2020-09-01","2021-03-01","2021-09-01","2021-12-07"],       
+     // classes : ["이등병","일병","상병","병장","민간인"],
+     // type : "병사",
     }, // 아직 정보를 받아오지 않은 상태이므로 null
     isLogin: false, // 로그인이 되었다면 true로 변경
     isLoginError: false,
-    rcData : {
-        discharge_P : 0, //전역일 퍼센트
-        promotion_P : 0, // 다음 계급 진급일 퍼센트
-        step_P : 0,     // 다음 호봉 진급일 퍼센트
-        currentDays : 0, // 현재 복무일
-        remainDays : 0,  // 남은 복무일
-        promotion : 0,   // 다음 계급 진급일
-        step : 0,       // 다음 호봉 진급일
-        serviceDays : 0, // 전체 복무일
-        rankIdx : 0,      // 사용자의 현재 계급idx
-        nmRankIdx :0,      //사용자의 현재 계급idx
-        stepIdx : 0,      // 사용자의 현재 호봉
-        nmStepIdx : 0,     // 사용자음 다음 호봉
-        nmHouse : false,   // 다음 달에 전역일 경우
-    },
+  },
+  getters : {
+    getUserInfo(state) {
+      return state.userInfo;
+    }
   },
   mutations: {
     loginSuccess(state, payload) { // 로그인 성공시,
@@ -50,78 +43,6 @@ export default new Vuex.Store({
       state.isLoginError = false;
       state.userInfo = null;
     },
-    updateRcData(state,payload){
-
-        var dateDiff = (a,b) =>{
-          return (a.getTime()-b.getTime())/(1000*3600*24);
-        }
-        
-        state.userInfo = payload;
-
-        var tmp = []; //진급일 배열을 임시로 저장할 배열
-        var idx = 0;  // 사용자의 현재 계급의 인덱스
-        var today = new Date(); 
-        payload.days.forEach((item)=> {         //tmp를 date객체를 가진 배열로 만들어 준다.
-            var list = item.split("-");
-            tmp.push(new Date(list[0],list[1]-1,list[2]));
-        });
-        var all = Math.floor(dateDiff(tmp[4],tmp[0]));//총 복무일
-        state.rcData.serviceDays = all;       
-
-        var cur = Math.floor(dateDiff(today,tmp[0])); //현재 복무일
-        state.rcData.currentDays = cur;
-
-        state.rcData.discharge_P = Math.round((dateDiff(today,tmp[0]) / all *100)*1000000)/1000000; //전역일 퍼센트
-        console.log(state.rcData.discharge_P);
-        /*----------------------------------------------------------------------------------------*/
-
-        state.rcData.remainDays = (all - cur);                     //남은 복무일
-
-        for(var i=0;i<4;i++){ //현재 계급 구하기
-          if(tmp[i].getTime()<=today.getTime() && tmp[i+1].getTime()>today.getTime()){
-            idx = i;
-            break;
-          }
-        }
-        state.rcData.rankIdx = idx;
-
-        var prom = dateDiff(tmp[idx+1],today)+1; //다음 계급 진급일
-        state.rcData.promotion = prom;
-        var prodiff = dateDiff(tmp[idx+1],tmp[idx]) // 현재 계급 진급일과 다음 계급 진급일 일수 차 구하기
-
-        state.rcData.promotion_P = Math.round(((prodiff-prom)/prodiff *100)*1000000)/1000000; // 다음계급 진급일 퍼센트
-
-         /*----------------------------------------------------------------------------------------*/
-
-        var curStep = today.getMonth() - tmp[idx].getMonth() +1;  // 현재 호봉 수
-        state.rcData.stepIdx = curStep;
-        if(today.getMonth()+1 == tmp[idx+1].getMonth()){ //다음달이 진급일이라 호봉 수가 1로 바뀔 때
-          if(idx == 3){
-            state.rcData.nmStepIdx = curStep+1;
-            state.rcData.nmRankIdx = state.rcData.rankIdx;
-          }else{
-            state.rcData.nmStepIdx = 1;
-            state.rcData.nmRankIdx = state.rcData.rankIdx +1;
-            }
-        } else {        
-          state.rcData.nmStepIdx = curStep+1;
-          state.rcData.nmRankIdx = state.rcData.rankIdx;
-        }
-
-
-        var tm = new Date(today.getFullYear(),today.getMonth(),1);    //현재 달의 첫날
-        var nm = new Date(today.getFullYear(),today.getMonth()+1,1);  //다음 달의 첫날
-        var diff = dateDiff(nm,tm)       //한달 크기 구하기
-        state.rcData.step =  dateDiff(nm,today)+1;            //다음 호봉 진급일
-
-        if((nm.getTime()-tmp[4].getTime()) > 0 ){                      //다음 달 첫날이 전역 이후 일 때
-          state.rcData.nmHouse= true;
-        }else {
-          state.rcData.nmHouse = false;
-        }
-
-        state.rcData.step_P = Math.round(((diff-state.rcData.step)/diff *100)*1000000)/1000000; // 다음 호봉 진급일 퍼센트
-    }
   },
   actions: {
     login(dispatch, loginObj) {
