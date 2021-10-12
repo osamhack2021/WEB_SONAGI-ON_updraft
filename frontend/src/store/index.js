@@ -6,36 +6,38 @@ import router from '../router';
 
 Vue.use(Vuex);
 
-const BACKEND_URL = 'https://osamhack2021-web-sonagi-on-updraft-66vr695xc4qg6-8000.githubpreview.dev';
-
-export const store = new Vuex.Store({
+export default new Vuex.Store({
   plugins: [
     createPersistedState(),
   ],
   state: {
+    BACKEND_URL : 'https://sonagi.run.goorm.io',
     isLogin: false,
+    access_token: "",
+    refresh_token: "",
   },
   mutations: {
-    loginSuccess(state) { // 로그인 성공시,
+    loginSuccess(state, payload) { // 로그인 성공시,
       state.isLogin = true;
+      state.access_token = payload.acess;
+      state.refresh_token = payload.refresh;
     },
     logout(state) { // 로그 아웃시,
       state.isLogin = false;
+      state.access_token = "";
+      state.refresh_token = "";
     },
   },
   actions: {
     login(dispatch, loginObj) {
       axios
-        .post(`${BACKEND_URL}/api/user/login/`, loginObj)
+        .post(`${this.state.BACKEND_URL}/api/user/login`, loginObj)
         .then((res) => {
-          localStorage.setItem('access_token', res.data.access_token);
-          localStorage.setItem('refresh_token', res.data.refresh_token);
-          this.commit('loginSucess')
-          router.push({ name: '대시보드' });
+          console.log(res);
+          this.commit('loginSuccess', res.data)
         })
         .catch(() => {
-          // todo : 응답에 맞게 alert 띄우기
-          alert('이메일과 비밀번호를 확인하세요.');
+          alert('해당하는 유저 정보가 없습니다.');
         });
     },
     logout({ commit }) {
@@ -44,18 +46,5 @@ export const store = new Vuex.Store({
       localStorage.removeItem('refresh_token');
       router.push({ name: '대시보드' });
     },
-    signup(dispatch, signupObj) {
-      axios
-        .post(`${BACKEND_URL}/api/rest-auth/registration/`, signupObj)
-        .then(() => {
-          alert('회원가입이 성공적으로 이뤄졌습니다.');
-          router.push({ name: '대시보드' });
-        })
-        .catch(() => {
-          // todo : 응답에 맞게 alert 띄우기
-          // todo : signup은 Register.vue에 넣자. 왜? -> 잘못된 입력에 대해서 응답으로 온 에러를 alert 말고 입력칸 위에 빨갛게 띄워주는게 나을듯. 어차피 commit도 안함.
-          alert('에러');
-        });
-      },
   },
 });

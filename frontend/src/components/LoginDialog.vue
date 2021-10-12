@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import {  mapActions } from 'vuex';
 
 export default {
   name: 'Login',
@@ -55,6 +55,8 @@ export default {
     source: String,
   },
   data: () => ({
+    email: null,
+    password: null,
     dialog: false,
     emailRules: [
       v => !!v || 'E-mail is required',
