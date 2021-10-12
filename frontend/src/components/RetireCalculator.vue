@@ -1,6 +1,6 @@
 <template>
-    <v-card>
-    <v-toolbar>
+    <v-card class="elevation-0">
+    <v-toolbar class="elevation-2">
     <v-toolbar-title>D-{{Math.floor(remainDays)}}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-title>전역일 계산기</v-toolbar-title>
@@ -9,7 +9,7 @@
     </v-toolbar>
     
   <v-divider></v-divider>
-    <v-container fluid>
+    <v-container fluid class="pt-5">
         <div>
             <v-row>
                 <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
@@ -92,9 +92,9 @@
                     <v-card>
                         <v-row class="no-gutters">
                             <div class="col-auto">
-                                <div class="red fill-height">&nbsp;</div>
+                                <div class="error fill-height">&nbsp;</div>
                             </div>
-                            <div class="col pa-3 py-4 red--text">
+                            <div class="col pa-3 py-4 error--text">
                                 <h5 class="text-truncate text-uppercase" >{{userInfo.classes[nmRankIdx]}} {{nmStepIdx}}호봉 진급</h5>
                                 <h1><animated-number
                                     :value="step"
@@ -103,7 +103,7 @@
                                     :round="1"
                                 /></h1>
                                 <b>{{step_P}}%</b>
-                                <v-progress-linear :rotate="-90" :size="100" :width="7" :value="step_P" color="red"></v-progress-linear>
+                                <v-progress-linear :rotate="-90" :size="100" :width="7" :value="step_P" color="error"></v-progress-linear>
                             </div>
                         </v-row>
                     </v-card>

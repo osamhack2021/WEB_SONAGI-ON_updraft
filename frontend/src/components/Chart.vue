@@ -1,7 +1,8 @@
 <template>
+<v-layout justify-center>
   <v-sparkline
     :value="value"
-    :gradient="gradient"
+    :gradient="color"
     :smooth="radius || false"
     :padding="padding"
     :line-width="width"
@@ -12,20 +13,14 @@
     :auto-line-width="autoLineWidth"
     auto-draw>
     <template v-slot:label="item">
-      {{ item.label }}
+      {{ item.month }}
     </template>
   </v-sparkline>
+</v-layout>
 </template>
 
 <script>
-  const gradients = [
-    ['#222'],
-    ['#42b3f4'],
-    ['red', 'orange', 'yellow'],
-    ['purple', 'violet'],
-    ['#00c6ff', '#F0F', '#FF0'],
-    ['#f72047', '#ffd200', '#1feaea'],
-  ]
+  const color = ['#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16),'#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16),'#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16),'#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16)]
   export default {
     name: 'Chart',
           
@@ -33,22 +28,15 @@
       width: 2,
       radius: 10,
       padding: 8,
-      lineCap: 'round',      gradient: gradients[4],
-      value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
+      lineCap: 'round',      
+      gradient: color,
+      value: [2, 5, 9, 0, 10, 3, 5, 1, 8, 2, 9, 3],
       gradientDirection: 'top',
-      gradients,
+      color,
       fill: false,
       type: 'trend',
-      autoLineWidth: false,
-      label: [
-        423,
-        446,
-        675,
-        510,
-        590,
-        610,
-        760
-      ]
+      autoLineWidth: true,
+      month: ["1월","2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
     }),
     
   }
