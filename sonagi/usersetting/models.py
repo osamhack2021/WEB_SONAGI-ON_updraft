@@ -16,7 +16,7 @@ type_choices = (
 )
 
 class UserSetting(models.Model):
-    email = models.EmailField(verbose_name="유저 이메일", max_length=255, unique=True, null=False)
+    email = models.ForeignKey("user.User", related_name="setting", to_field="email", on_delete=models.CASCADE, db_column="email")
     # todo : 회원가입 시 아래 내용들 다 랜덤으로 채워버린 다음에 바로 초기 세팅 화면으로 넘겨서 세팅 시키거나
     #        회원가입 전에 아래 내용들을 다 받자
     nickname = models.CharField(verbose_name="닉네임", max_length=20, null=False, unique=True)

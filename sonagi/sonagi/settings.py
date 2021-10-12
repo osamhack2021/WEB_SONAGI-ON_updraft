@@ -122,9 +122,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'ko'
-
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'ko-kr'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -146,7 +145,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # cors header setting
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
-    "https://osamhack2021-web-sonagi-on-updraft-66vr695xc4qg6-8080.githubpreview.dev"
+    "https://osamhack2021-web-sonagi-on-updraft-w6v96r5qcgpww-8080.githubpreview.dev"
 ]
 CORS_ALLOW_METHODS = (
     'DELETE',
@@ -171,7 +170,7 @@ CORS_ALLOW_HEADERS = (
 )
 
 #auth setting
-AUTH_USER_MODEL = "user.CustomUser"
+AUTH_USER_MODEL = "user.User"
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None # username 필드 사용 x
 ACCOUNT_EMAIL_REQUIRED = True            # email 필드 사용 o
 ACCOUNT_USERNAME_REQUIRED = False        # username 필드 사용 x
@@ -180,6 +179,9 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 SITE_ID = 1
 
 REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         #'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
@@ -191,7 +193,7 @@ REST_FRAMEWORK = {
 }
 
 # 이 아래 두 코드를 통해 rest_auth에서 회원가입 시 사용하는 시리얼라이저와, 유저 디테일을 뽑아올 때 사용하는 시리얼라이즈가 바뀌게 된다.
-REST_AUTH_SERIALIZERS = {     
+REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'user.serializers.UserDisplaySerializer',
 }
 REST_AUTH_REGISTER_SERIALIZERS = {
@@ -199,12 +201,15 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 }
 
 SIMPLE_JWT = {
-    # If the secret is wrong, it will raise a jwt.DecodeError telling you as such. You can still get at the payload by setting the JWT_VERIFY to False.
+    # If the secret is wrong, it will raise a jwt.DecodeError telling you as such.
+    # You can still get at the payload by setting the JWT_VERIFY to False.
     'JWT_VERIFY': True,
     # You can turn off expiration time verification by setting JWT_VERIFY_EXPIRATION to False.
-    # If set to False, JWTs will last forever meaning a leaked token could be used by an attacker indefinitely.
+    # If set to False, JWTs will last forever meaning a leaked
+    # token could be used by an attacker indefinitely.
     'JWT_VERIFY_EXPIRATION': True,
-    # This is an instance of Python's datetime.timedelta. This will be added to datetime.utcnow() to set the expiration time.
+    # This is an instance of Python's datetime.timedelta.
+    # This will be added to datetime.utcnow() to set the expiration time.
     # Default is datetime.timedelta(seconds=300)(5 minutes).
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
     'JWT_ALLOW_REFRESH': True,

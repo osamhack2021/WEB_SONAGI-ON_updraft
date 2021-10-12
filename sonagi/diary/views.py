@@ -5,8 +5,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.http import JsonResponse
 from django.db.models import Q
+from django.contrib.auth import get_user_model
 
 # Create your views here.
+
+User = get_user_model()
 
 class DiaryWriteView(APIView):
     def post(self, request):
@@ -15,43 +18,45 @@ class DiaryWriteView(APIView):
 
         serializer = DiaryWriteSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(email=request.user.email)
+            serializer.save(email=User.objects.get(email=request.user.email))
             return JsonResponse({"result":"success"}, status=status.HTTP_201_CREATED)
-        return JsonResponse({"result":"fail", "msg":"serializer.errors"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DiaryRewriteView(APIView):
     def post(self, request):
         # request : {"id", "title", "content", "emotion"}
-        # permission : logined user  
-  
+        # permission : logined user 
+         
+        cur_user = User.objects.get(email=request.user.email)
         try:
-            target = Diary.objects.get(id=request.data['id'], email=request.user.email)
+            target = cur_user.diary.get(id=request.data['id'])
         except Diary.DoesNotExist:
-            return JsonResponse({"result":"fail", "msg":{'error': '해당하는 일기가 존재하지 않습니다.'}}, status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse({'detail': '해당하는 일기가 존재하지 않습니다.'}, status=status.HTTP_404_NOT_FOUND)
         except:
-            return JsonResponse({"result":"fail", "msg":{'error': '잘못된 요청입니다.'}}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'detail': '잘못된 요청입니다.'}, status=status.HTTP_400_BAD_REQUEST)
         
         serializer = DiaryWriteSerializer(target, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({"result":"success"}, status=status.HTTP_205_RESET_CONTENT)
         else:
-            return JsonResponse({"result":"fail", "msg":{serializer.errors}}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DiaryDeleteView(APIView):
     def post(self, request):
         # request : {"id"}
         # permission : logined user 
              
+        cur_user = User.objects.get(email=request.user.email)
         try:
-            target = Diary.objects.get(id=request.data['id'], email=request.user.email)
+            target = cur_user.diary.get(id=request.data['id'])
         except Diary.DoesNotExist:
-            return JsonResponse({"result":"fail", "msg":{'error': '해당하는 일기가 존재하지 않습니다.'}}, status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse({'detail': '해당하는 일기가 존재하지 않습니다.'}, status=status.HTTP_404_NOT_FOUND)
         except:
-            return JsonResponse({"result":"fail", "msg":{'error': '잘못된 요청입니다.'}}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'detail': '잘못된 요청입니다.'}, status=status.HTTP_400_BAD_REQUEST)
         
         target.delete()
-        return JsonResponse({"result":"success"}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({"result":"success"}, status=status.HTTP_200_OK)
 
 
 class DiaryListView(APIView):
@@ -59,7 +64,8 @@ class DiaryListView(APIView):
         # request : nothing
         # permission : logined user      
         
-        target = Diary.objects.filter(email=request.user.email)
+        cur_user = User.objects.get(email=request.user.email)
+        target = cur_user.diary.filter(email=request.user.email)
         serializer = DiaryListSerializer(target, many=True)
         return Response(serializer.data)
 
@@ -67,13 +73,15 @@ class DiaryListView(APIView):
         # request : {"start_date", "end_date", "search", "emotion"} 
         # !! emotion should be blank or in emotion_choices in diary/models.py
         # permission : logined user 
-        
+
+        cur_user = User.objects.get(email=request.user.email)
+
         serializer = DiarySearchSerializer(data=request.data)
         if not serializer.is_valid():
-            return JsonResponse({"result":"fail", "msg":{serializer.errors}}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
         validated_data = serializer.validated_data
-        target = Diary.objects.filter(Q(title__icontains=validated_data['search']) | Q(content__icontains=validated_data['search']),
+        target = cur_user.diary.filter(Q(title__icontains=validated_data['search']) | Q(content__icontains=validated_data['search']),
                                         write_date__range=[validated_data['start_date'], validated_data['end_date']],
                                         emotion__icontains=validated_data['emotion'])
         

@@ -11,7 +11,7 @@ emotion_choices = (
 )
 
 class Diary(models.Model):
-    email = models.EmailField(verbose_name="작성자 이메일")
+    email = models.ForeignKey("user.User", related_name="diary", to_field="email", on_delete=models.CASCADE, db_column="email")
     title = models.CharField(verbose_name="한줄평", max_length=100, null=False)
     content = models.CharField(verbose_name="내용", max_length=2000, null=True)
     emotion = models.CharField(verbose_name="감정", max_length=1, choices=emotion_choices, null=False)

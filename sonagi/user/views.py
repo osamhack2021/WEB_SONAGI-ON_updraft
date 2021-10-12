@@ -12,11 +12,11 @@ from rest_framework import status
 from json.decoder import JSONDecodeError
 from django.http import JsonResponse
 from allauth.socialaccount.models import SocialAccount
-
-User = get_user_model()
+from sonagi.utils import initialize_usersetting
 
 # Create your views here.
 
+User = get_user_model()
 BASE_URL = getattr(settings, "BASE_URL")
 GOOGLE_CALLBACK_URI = BASE_URL + 'api/user/social-login/google/callback'
 
@@ -58,7 +58,7 @@ def google_login_callback(request):
         f"https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={access_token}")
     email_req_status = email_req.status_code
     if email_req_status != 200:
-        return JsonResponse({"result":"fail", "msg":{'error': '이메일 정보를 가져올 수 없습니다.'}}, status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse({'detail': '이메일 정보를 가져올 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
     email_req_json = email_req.json()
     email = email_req_json.get('email')
 
@@ -71,16 +71,16 @@ def google_login_callback(request):
         # 다른 SNS로 가입된 유저
         social_user = SocialAccount.objects.get(user=user)
         if social_user is None:
-            return JsonResponse({"result":"fail", "msg":{'error': '소셜 계정으로 가입된 유저가 아닙니다.'}}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'detail': '소셜 계정으로 가입된 유저가 아닙니다.'}, status=status.HTTP_400_BAD_REQUEST)
         if social_user.provider != 'google':
-            return JsonResponse({"result":"fail", "msg":{'error': '구글 계정으로 가입된 유저가 아닙니다.'}}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'detail': '구글 계정으로 가입된 유저가 아닙니다.'}, status=status.HTTP_400_BAD_REQUEST)
         # 기존에 Google로 가입된 유저
         data = {'access_token': access_token, 'code': code}
         accept = requests.post(
             f"{BASE_URL}api/user/social-login/google/login_finish", data=data)
         accept_status = accept.status_code
         if accept_status != 200:
-            return JsonResponse({"result":"fail", "msg":{'error': '로그인에 실패했습니다. 잠시 후 다시 시도해주세요.'}}, status=accept_status)
+            return JsonResponse({'detail': '로그인에 실패했습니다. 잠시 후 다시 시도해주세요.'}, status=accept_status)
         accept_json = accept.json()
         accept_json.pop('user', None)
         return JsonResponse(accept_json)
@@ -91,13 +91,16 @@ def google_login_callback(request):
             f"{BASE_URL}api/user/social-login/google/login_finish", data=data)
         accept_status = accept.status_code
         if accept_status != 200:
-            return JsonResponse({"result":"fail", "msg":{'error': '구글 계정을 통한 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요.'}}, status=accept_status)
+            return JsonResponse({'detail': '구글 계정을 통한 회원가입에 실패했습니다. 잠시 후 다시 시도해주세요.'}, status=accept_status)
+
+        # initializer(create) usersetting for new user
+        initialize_usersetting(email)
+
         accept_json = accept.json()
         accept_json.pop('user', None)
         return JsonResponse(accept_json)
 
 class google_login_finish(SocialLoginView):
-    #authentication_classes = [] # disable authentication
     adapter_class = GoogleOAuth2Adapter
     callback_url = GOOGLE_CALLBACK_URI
     client_class = OAuth2Client
