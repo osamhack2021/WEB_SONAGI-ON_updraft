@@ -132,19 +132,14 @@
 
 <script>
 import AnimatedNumber from "animated-number-vue";
-import {mapState,mapMutations,mapActions} from 'vuex'
 
 export default {
   components: {
     AnimatedNumber
   },
-  computed :{
-    ...mapState([
-      "userInfo"
-    ]),
-  },
   data() {
     return {
+        userInfo : {},
         tmp : [],
         discharge_P : 0, //전역일 퍼센트
         remain_P : 0, // 남은 복무일 퍼센트
@@ -173,8 +168,11 @@ export default {
       return `D+${value}`;
     },
     updateRcData(){
-        var ui = this.$store.getters.getUserInfo;
-        console.log(ui);
+        var ui = {
+            days : ["2020-08-24","2020-11-01","2021-05-01","2021-11-01","2022-02-23"],       
+            classes : ["이등병","일병","상병","병장","민간인"],
+            type : "병사",
+        }; this.userInfo = ui;
         var tmp = []; //진급일 배열을 임시로 저장할 배열
         console.log(tmp);
         var idx = 0;  // 사용자의 현재 계급의 인덱스
@@ -231,7 +229,7 @@ export default {
         }
     },
     mounted() {
-      setInterval(this.updateRcData,300);
+      this.updateRcData();
     },
 };
 </script>
