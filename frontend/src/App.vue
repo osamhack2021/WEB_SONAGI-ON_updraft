@@ -28,10 +28,6 @@
 
       <!-- Sizes your content based upon application components -->
       <v-main>
-         <span class="group pa-2">
-            <v-icon small style="margin-left:5px">home</v-icon>
-            <v-breadcrumbs :items="items"></v-breadcrumbs>
-         </span>
          <router-view />
          <!-- Provides the application the proper gutter -->
       </v-main>
@@ -69,24 +65,8 @@
      },
    
  
-         data: ( ) => ({/*
-       items: [
-           {
-             text: 'Dashboard',
-             disabled: false,
-             href: 'Dashboard',
-           },
-           {
-             text: 'Link 1',
-             disabled: false,
-             href: 'breadcrumbs_link_1',
-           },
-           {
-             text: 'Link 2',
-             disabled: true,
-             href: 'breadcrumbs_link_2',
-           },
-         ],*/
+      data: ( ) => ({
+         
      }),
    };
 </script>
