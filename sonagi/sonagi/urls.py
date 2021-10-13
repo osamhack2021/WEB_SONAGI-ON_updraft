@@ -23,7 +23,7 @@ urlpatterns = [
     path("api/user/", include("user.urls")),
     path('api/user/login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/user/refresh', TokenRefreshView.as_view(), name='token_refresh'),
-    path("api/user/registration/", include("dj_rest_auth.registration.urls")),
+    path("api/user/registration", include("dj_rest_auth.registration.urls")),
     # setting app path
     path("api/usersetting/", include("usersetting.urls")),
     # diary app path
