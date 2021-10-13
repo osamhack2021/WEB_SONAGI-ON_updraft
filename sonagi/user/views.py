@@ -28,7 +28,7 @@ class UserShowView(APIView):
 
 class UserUniquemailView(APIView):
     permission_classes = [rest_framework.permissions.AllowAny]
-    def get(self, request):
+    def post(self, request):
         try:
             User.objects.get(email=request.data['email'])
             return Response(status=status.HTTP_409_CONFLICT)
