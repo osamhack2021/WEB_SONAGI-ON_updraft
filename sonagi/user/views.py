@@ -13,6 +13,7 @@ from json.decoder import JSONDecodeError
 from django.http import JsonResponse
 from allauth.socialaccount.models import SocialAccount
 from sonagi.utils import initialize_usersetting
+import rest_framework
 
 # Create your views here.
 
@@ -26,6 +27,7 @@ class UserShowView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class UserUniquemailView(APIView):
+    permission_classes = [rest_framework.permissions.AllowAny]
     def get(self, request):
         try:
             User.objects.get(email=request.data['email'])
