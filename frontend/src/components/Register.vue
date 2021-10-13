@@ -2,7 +2,6 @@
   <v-row justify="center">
     <v-dialog
       v-model="dialog"
-      persistent
       max-width="600px"
     >
       <template v-slot:activator="{ on, attrs }">
@@ -74,13 +73,6 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="dialog = false"
-          >
-            닫기
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
             @click="register({email, password, password2})"
           >
             확인
@@ -92,14 +84,24 @@
 </template>
 
 <script>
+// https://minu0807.tistory.com/82
+// https://sundries-in-myidea.tistory.com/130
+// rule로 머 띄우는거 대해서 참고할 글 따봉
+
+// https://vuetifyjs.com/en/components/alerts/#usage
+// alert component를 써보자
+
 export default {
   data: () => ({
     dialog: false,
+    email: "",
+    password: "",
+    password2: "",
   }),
   methods: {
     register(signupObj){
       this.axios
-        .post(`${this.$store.state.BACKEND_URL}/api/user/registration/`, signupObj)
+        .post(`${this.$store.state.BACKEND_URL}/api/user/registration`, signupObj)
         .then(() => {
           alert(`회원가입이 성공적으로 이뤄졌습니다.\n회원 정보 수정에서 복무 정보를 입력하실 수 있습니다.`);
         })

@@ -30,15 +30,18 @@ export default new Vuex.Store({
   },
   actions: {
     login(dispatch, loginObj) {
-      axios
-        .post(`${this.state.BACKEND_URL}/api/user/login`, loginObj)
-        .then((res) => {
-          console.log(res);
-          this.commit('loginSuccess', res.data)
-        })
-        .catch(() => {
-          alert('해당하는 유저 정보가 없습니다.');
-        });
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${this.state.BACKEND_URL}/api/user/login`, loginObj)
+          .then((res) => {
+            console.log(res);
+            this.commit('loginSuccess', res.data);
+            resolve(true);
+          })
+          .catch((res) => {
+            reject(res.data);
+          });
+      })
     },
     logout({ commit }) {
       commit('logout');
