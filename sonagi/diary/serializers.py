@@ -10,7 +10,7 @@ class DiaryWriteSerializer(serializers.ModelSerializer):
 class DiaryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Diary
-        fields = ['title', 'content', 'emotion', 'write_date']
+        fields = ['id', 'title', 'content', 'emotion', 'write_date']
 
 class DiarySearchSerializer(serializers.ModelSerializer):
     start_date = serializers.DateField(label='검색 시작일')
