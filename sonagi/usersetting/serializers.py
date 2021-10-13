@@ -5,4 +5,5 @@ from rest_framework import serializers
 class UserSettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserSetting
-        fields = '__all__'
+        fields = ["nickname", "major", "type", "enlisted_date", "delisted_date", "promotion1_date", "promotion2_date", "promotion3_date"]
+        
