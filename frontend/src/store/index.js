@@ -29,13 +29,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login(dispatch, loginObj) {
+    login({ commit }, loginObj) {
       return new Promise((resolve, reject) => {
         axios
           .post(`${this.state.BACKEND_URL}/api/user/login`, loginObj)
           .then((res) => {
-            console.log(res);
-            this.commit('loginSuccess', res.data);
+            commit('loginSuccess', res.data);
             resolve(true);
           })
           .catch((res) => {

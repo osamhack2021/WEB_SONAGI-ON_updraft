@@ -20,31 +20,35 @@
         </v-card-title>
         <v-card-text>
           <v-container>
+            <v-form ref="registerform" lazy-validation>
             <v-row>
               <v-col cols="12">
                 <v-text-field
+                  name="email"
                   label="이메일 *"
                   v-model="email"
-                  required
+                  :rules="emailRules"
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
+                  name="password"
                   label="패스워드 *"
                   v-model="password"
                   type="password"
-                  required
+                  :rules="passwordRules"
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
+                  name="password2"
                   label="패스워드 확인 *"
                   v-model="password2"
                   type="password"
-                  required
+                  :rules="passwordRules2"
                 ></v-text-field>
               </v-col>
-              <v-col
+              <!--<v-col
                 cols="12"
                 sm="6"
               >
@@ -63,10 +67,11 @@
                   label="Interests"
                   multiple
                 ></v-autocomplete>
-              </v-col>
+              </v-col>-->
             </v-row>
+            </v-form>
           </v-container>
-          <small>* 필수 입력 칸입니다.</small>
+          <small>* 필수 입력 항목입니다.</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -92,25 +97,59 @@
 // alert component를 써보자
 
 export default {
-  data: () => ({
-    dialog: false,
-    email: "",
-    password: "",
-    password2: "",
-  }),
+  name: 'Register',
+  // 아래와 같은 형식으로 data를 써야 안에서 this를 쓸 수 있다.
+  data() {
+    return {
+      dialog: false,
+      email: "",
+      emailRules: [
+        v => !!v || '이메일은 필수 항목입니다.',
+        v => /.+@.+\..+/.test(v) || '이메일 형식이 유효하지 않습니다.',
+        () => this.emailunique || '중복된 이메일입니다.',
+      ],
+      password: "",
+      passwordRules: [
+        v => !!v || '패스워드는 필수 항목입니다.',
+      ],
+      password2: "",
+      passwordRules2: [
+        v => !!v || '패스워드 확인은 필수 항목입니다.',
+        v => v === this.password || '패스워드가 일치하지 않습니다.',
+      ],
+    }
+  },
   methods: {
-    register(signupObj){
-      this.axios
-        .post(`${this.$store.state.BACKEND_URL}/api/user/registration`, signupObj)
+    async register(signupObj){
+      this.emailunique = await this.axios.post(`${this.$store.state.BACKEND_URL}/api/user/emailexist`, signupObj)
         .then(() => {
-          alert(`회원가입이 성공적으로 이뤄졌습니다.\n회원 정보 수정에서 복무 정보를 입력하실 수 있습니다.`);
+          return true;
         })
         .catch(() => {
-          // todo : 응답에 맞게 alert 띄우기
-          // todo : signup은 Register.vue에 넣자. 왜? -> 잘못된 입력에 대해서 응답으로 온 에러를 alert 말고 입력칸 위에 빨갛게 띄워주는게 나을듯. 어차피 commit도 안함.
-          alert('에러');
-        });
-    }
+          return false;
+        })
+      const is_valid = this.$refs.registerform.validate();
+      this.emailunique = true;
+      if (is_valid){
+        this.axios
+          .post(`${this.$store.state.BACKEND_URL}/api/user/registration`, signupObj)
+          .then(() => {
+            this.dialog = false
+            alert(`회원가입에 성공했습니다.\n회원 정보 수정에서 복무 정보를 입력하실 수 있습니다.`);
+          })
+          .catch(() => {
+            alert('예상치 못한 문제가 발생했습니다.\n고객센터로 문의 바랍니다.');
+          });
+      }
+    },
+  },
+  watch: {
+    dialog: function(val){
+      if (!val){
+        this.$refs.registerform.reset();
+        this.emailunique = true;
+      }
+    },
   }
 }
 </script>

@@ -3,7 +3,6 @@
     <v-dialog
       v-model="dialog"
       max-width="600px"
-      @click:outside="closeDialog"
     > 
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -24,7 +23,7 @@
                       v-model="loginerror"
                     > 존재하지 않는 계정입니다. </v-alert>
                      <v-card-text>
-                        <v-form ref="loginform" lazy-validate>
+                        <v-form ref="loginform">
                            <v-text-field
                               prepend-icon="mail"
                               name="login"
@@ -33,7 +32,6 @@
                               :rules="emailRules"
                            ></v-text-field>
                            <v-text-field
-                              id="password"
                               prepend-icon="lock"
                               name="password"
                               v-model="password"
@@ -84,11 +82,15 @@ export default {
           })
       }
     },
-    closeDialog() {
-      this.$refs.loginform.reset();
-      this.loginerror = false;
-    },
   },
+  watch: {
+    dialog: function(val){
+      if (!val){
+        this.$refs.loginform.reset();
+        this.loginerror = false;
+      }
+    }
+  }
 };
 </script>
 
