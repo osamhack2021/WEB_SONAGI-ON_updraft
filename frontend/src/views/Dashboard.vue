@@ -10,13 +10,13 @@
     <v-divider></v-divider>
     <v-row class="py-4">
       <v-layout justify-space-around>
-      <v-card class="col-9 pa-4 ma-4">
+      <v-card class="col-9 ma-4">
         <div>
           일기 쓴 횟수
         </div>
         <Chart />
       </v-card>
-      <v-card class="col-3 pa-4 ma-4" style="max-width: 300px;">
+      <v-card class="col-3 ma-4" style="max-width: 300px;">
         <v-layout justify-center>
         <DashboardDatePicker />
         </v-layout>

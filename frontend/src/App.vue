@@ -27,7 +27,7 @@
       </v-app-bar>
 
       <!-- Sizes your content based upon application components -->
-      <v-main>
+      <v-main class="pf-8">
          <router-view />
          <!-- Provides the application the proper gutter -->
       </v-main>
