@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import createPersistedState from 'vuex-persistedstate';
-import router from '../router';
+// import router from '../router';
 
 Vue.use(Vuex);
 
@@ -19,7 +19,7 @@ export default new Vuex.Store({
   mutations: {
     loginSuccess(state, payload) { // 로그인 성공시,
       state.isLogin = true;
-      state.access_token = payload.acess;
+      state.access_token = payload.access;
       state.refresh_token = payload.refresh;
     },
     logout(state) { // 로그 아웃시,
@@ -46,7 +46,6 @@ export default new Vuex.Store({
       commit('logout');
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
-      router.push({ name: '대시보드' });
     },
   },
 });

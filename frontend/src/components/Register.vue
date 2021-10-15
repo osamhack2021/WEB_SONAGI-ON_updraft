@@ -48,26 +48,6 @@
                   :rules="passwordRules2"
                 ></v-text-field>
               </v-col>
-              <!--<v-col
-                cols="12"
-                sm="6"
-              >
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
-                  required
-                ></v-select>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-autocomplete
-                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                  label="Interests"
-                  multiple
-                ></v-autocomplete>
-              </v-col>-->
             </v-row>
             </v-form>
           </v-container>
@@ -102,11 +82,13 @@ export default {
   data() {
     return {
       dialog: false,
+      emailunique: true,
       email: "",
       emailRules: [
         v => !!v || '이메일은 필수 항목입니다.',
         v => /.+@.+\..+/.test(v) || '이메일 형식이 유효하지 않습니다.',
-        () => this.emailunique || '중복된 이메일입니다.',
+        v => v.length <= 30 || '이메일 길이는 최대 30자입니다.',
+        () => this.emailunique || '이미 사용중인 이메일입니다.',
       ],
       password: "",
       passwordRules: [
@@ -121,24 +103,20 @@ export default {
   },
   methods: {
     async register(signupObj){
-      this.emailunique = await this.axios.post(`${this.$store.state.BACKEND_URL}/api/user/emailexist`, signupObj)
-        .then(() => {
-          return true;
-        })
-        .catch(() => {
-          return false;
-        })
-      const is_valid = this.$refs.registerform.validate();
-      this.emailunique = true;
-      if (is_valid){
+      if (this.$refs.registerform.validate()){
         this.axios
           .post(`${this.$store.state.BACKEND_URL}/api/user/registration`, signupObj)
           .then(() => {
             this.dialog = false
-            alert(`회원가입에 성공했습니다.\n회원 정보 수정에서 복무 정보를 입력하실 수 있습니다.`);
+            alert(`회원가입에 성공했습니다.\n설정에서 회원 정보를 변경하실 수 있습니다.`);
           })
-          .catch(() => {
-            alert('예상치 못한 문제가 발생했습니다.\n고객센터로 문의 바랍니다.');
+          .catch((error) => {
+            if(error.response.data.email){
+              this.emailunique = false;
+              this.$refs.registerform.validate();
+            } else {
+              alert('예상치 못한 문제가 발생했습니다.\n고객센터로 문의 바랍니다.');
+            }
           });
       }
     },
@@ -150,6 +128,9 @@ export default {
         this.emailunique = true;
       }
     },
+    email: function() {
+      this.emailunique = true;
+    }
   }
 }
 </script>
