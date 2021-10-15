@@ -8,7 +8,7 @@ class UserSettingSerializer(serializers.ModelSerializer):
         fields = ["email", "nickname", "major", "type", "enlisted_date", "delisted_date", "promotion1_date", "promotion2_date", "promotion3_date"]
         extra_kwargs = {"email": {"read_only": True}}
     def validate_nickname(self, val):
-        if len(val) < 4 or len(val) > 15 :
-            raise serializers.ValidationError({'nickname' : '닉네임은 4자 이상 15자 이하여야 합니다.'})
+        if len(val) < 2 or len(val) > 15 :
+            raise serializers.ValidationError({'nickname' : '닉네임은 2자 이상 15자 이하여야 합니다.'})
         return val
         
