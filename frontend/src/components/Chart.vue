@@ -1,5 +1,5 @@
 <template>
-<v-layout justify-center>
+<v-layout justify-center> 
   <v-sparkline
     :value="value"
     :gradient="color"
@@ -11,10 +11,9 @@
     :fill="fill"
     :type="type"
     :auto-line-width="autoLineWidth"
-    auto-draw>
-    <template v-slot:label="item">
-      {{ item.month }}
-    </template>
+    auto-draw
+    :labels="month"
+    color="black" style="max-height: 280px;">
   </v-sparkline>
 </v-layout>
 </template>
@@ -30,13 +29,13 @@
       padding: 8,
       lineCap: 'round',      
       gradient: color,
-      value: [2, 5, 9, 0, 10, 3, 5, 1, 8, 2, 9, 3],
+      value: [0,0,8,2,4,2, 5, 9, 0, 10, 3, 5, 1, 8, 2, 0,0,0,0],
       gradientDirection: 'top',
       color,
       fill: false,
       type: 'trend',
       autoLineWidth: true,
-      month: ["1월","2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+      month: ["8월", "9월", "10월", "11월", "12월", "1월","2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월", "1월","2월"]
     }),
     
   }

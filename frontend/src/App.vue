@@ -28,7 +28,11 @@
 
       <!-- Sizes your content based upon application components -->
       <v-main class="pf-8">
-         <router-view />
+         <v-card
+         class="mx-auto"
+         >
+            <router-view />
+         </v-card>
          <!-- Provides the application the proper gutter -->
       </v-main>
 

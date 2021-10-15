@@ -1,26 +1,35 @@
 <template>
   <div>
-    <span class="group pa-2">
+    <v-card class="group pa-2">
       <v-icon small style="margin-left:5px">home</v-icon>
       <v-breadcrumbs :items="bcLink"></v-breadcrumbs>
-    </span>
-    <div class="py-4">
+    </v-card>
+    <div>
     <RetireCalculator />
     </div>
     <v-divider></v-divider>
-    <v-row class="py-4">
-      <v-layout justify-space-around>
-      <v-card class="col-9 ma-4">
+    <v-row class="pa-4">
+      <v-layout row>
+      <v-flex
+        grow
+        ma-4
+      >
+      <v-card class="pa-3">
         <div>
           일기 쓴 횟수
         </div>
         <Chart />
       </v-card>
+      </v-flex>
+      <v-flex
+        shrink
+      >
       <v-card class="col-3 ma-4" style="max-width: 300px;">
         <v-layout justify-center>
         <DashboardDatePicker />
         </v-layout>
       </v-card>
+      </v-flex>
       </v-layout>
     </v-row>
     <v-divider></v-divider>
