@@ -3,11 +3,14 @@
   <v-card class="py-8 px-4 ma-4" style="max-width: 900px;">
       <div class="scroll-box">  
         <v-timeline dense v-for="(v,k) in diaryData" :key="k">
+          <a class="disablePointe ma-4" :name="k"></a>
+          <div class="margin"></div>
+          <v-card class="pa-2 ma-4" style="width: 150px; text-align: center;" color="blue-grey lighten-4">{{k}}</v-card>
           <v-timeline-item v-for="item in v" :key="item" :icon="item.emotion" :color="'#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16)">
             <v-card class="pa-2 ma-2">
               <v-layout align-center justify-space-between row fill-height class="pa-2 ma-2">
               <v-card-title>{{item.title}}</v-card-title>
-              <v-btn depressed color="white" link to="/diary-write">
+              <v-btn depressed color="white" link to="/diary-write"> 
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               
@@ -22,6 +25,7 @@
         </v-timeline>
       </div>
   </v-card>
+  
 </v-layout>
 </template>
 
@@ -97,6 +101,15 @@
   }
 </script>
 
-<style lang="">
-    
+<style>
+.disablePointer {
+  pointer-events: none; 
+}
+.disablePointer:link {
+  text-decoration: none;
+  color: black;
+}
+.margin {
+  margin-top: 100px;
+}
 </style>
