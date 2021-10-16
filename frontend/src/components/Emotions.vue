@@ -32,25 +32,25 @@
 
     
 export default {
-    data:()=>({
-        model: null,
-        
-        emotions: [
-        'mdi-emoticon-excited-outline',
-        'mdi-emoticon-cool-outline',
-        'mdi-emoticon-neutral-outline',
-        'mdi-emoticon-confused-outline',
-        'mdi-emoticon-angry-outline',
-        'mdi-emoticon-sad-outline',
-        'mdi-emoticon-sick-outline',
-        'mdi-emoticon-cry-outline',
-        'mdi-emoticon-dead-outline',
-        ],
-    }),
-    watch: {
-      model: function(){
-        console.log(this.model);
-      }
+  data:()=>({
+      model: null,
+      
+      emotions: [
+      'mdi-emoticon-excited-outline',
+      'mdi-emoticon-cool-outline',
+      'mdi-emoticon-neutral-outline',
+      'mdi-emoticon-confused-outline',
+      'mdi-emoticon-angry-outline',
+      'mdi-emoticon-sad-outline',
+      'mdi-emoticon-sick-outline',
+      'mdi-emoticon-cry-outline',
+      'mdi-emoticon-dead-outline',
+      ],
+  }),
+  watch: {
+    model: function(val){
+      this.$emit('emotion-extract', this.emotions[val].split('-')[2]);
     }
+  }
 }
 </script>

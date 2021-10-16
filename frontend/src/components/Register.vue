@@ -102,7 +102,7 @@ export default {
     }
   },
   methods: {
-    async register(signupObj){
+    register(signupObj){
       if (this.$refs.registerform.validate()){
         this.axios
           .post(`${this.$store.state.BACKEND_URL}/api/user/registration`, signupObj)
