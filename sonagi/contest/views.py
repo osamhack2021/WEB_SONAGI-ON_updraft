@@ -2,7 +2,7 @@ from .models import Contest
 from .serializers import ContestListSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import 
+from rest_framework import status
 import rest_framework
 
 # Create your views here.
