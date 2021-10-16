@@ -159,8 +159,8 @@ export default {
       ],
       nickname: "",
       nicknameRules: [
-        v => v.length > 4 || '닉네임은 4자 이상이어야 합니다.',
-        v => v.length < 15 || '닉네임은 15자 이하여야 합니다.',
+        v => v.length > 1 || '닉네임은 2자 이상이어야 합니다.',
+        v => v.length < 16 || '닉네임은 15자 이하여야 합니다.',
       ],
       major: { state: '', abbr: '' },
       major_items: [
@@ -186,37 +186,20 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isLogin', 'access_token', 'refresh_token']),
+    ...mapState(['isLogin', 'access_token', 'refresh_token', 'userdata']),
   },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['updateUserdata']),
     refreshInfo: function(){
-      const config = {
-        headers: {
-          Authorization: `Bearer ${this.access_token}`,
-        },
-      };
-      this.axios.get(`${this.$store.state.BACKEND_URL}/api/usersetting/get`, config)
-        .then((res) => {
-          this.email = res.data.email;
-          this.nickname = res.data.nickname;
-          this.major = this.major_items.filter(v => v.abbr === res.data.major)[0];
-          this.type = this.type_items.filter(v => v.abbr === res.data.type)[0];
-          this.enlisted_date = res.data.enlisted_date;
-          this.delisted_date = res.data.delisted_date;
-          this.promotion1_date = res.data.promotion1_date ;
-          this.promotion2_date = res.data.promotion2_date;
-          this.promotion3_date = res.data.promotion3_date
-        })
-        .catch((error) => {
-          if(error.response.data.code === "token_not_valid"){
-            this.logout();
-            alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
-          } else {
-            this.logout();
-            alert("[PF001] 예상치 못한 에러가 발생했습니다.")
-          }
-        })
+      this.email = this.userdata.email;
+      this.nickname = this.userdata.nickname;
+      this.major = this.major_items.filter(v => v.abbr === this.userdata.major)[0];
+      this.type = this.type_items.filter(v => v.abbr === this.userdata.type)[0];
+      this.enlisted_date = this.userdata.enlisted_date;
+      this.delisted_date = this.userdata.delisted_date;
+      this.promotion1_date = this.userdata.promotion1_date ;
+      this.promotion2_date = this.userdata.promotion2_date;
+      this.promotion3_date = this.userdata.promotion3_date
     },
     updateSetting: function(){
       const config = {
@@ -234,10 +217,11 @@ export default {
                          "promotion3_date":this.promotion3_date,}
       this.axios.post(`${this.$store.state.BACKEND_URL}/api/usersetting/revise`, updateObj, config)
         .then(() => {
+          this.updateUserdata();
           alert("성공적으로 변경되었습니다.");
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          this.updateUserdata();
         })
     },
     updateDate: function({type, newDate}){

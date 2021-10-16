@@ -57,22 +57,26 @@
 </template>
 
 <script>
-   import Category from './components/Category.vue';
-   import Profile from './components/Profile.vue';
-   
-   export default {
-     name: 'App',
-   
-     components: {
-         Profile,
-         Category,
-     },
-   
- 
-      data: ( ) => ({
-         
-     }),
-   };
+import Category from './components/Category.vue';
+import Profile from './components/Profile.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Profile,
+    Category,
+  }, 
+  data: () => ({   
+  }),
+  watch: {
+    $route: function() {
+      this.$store.dispatch('refresh');
+    }
+  },
+  created() {
+    this.$store.dispatch('refresh');
+  }
+};
 </script>
 
 <style>

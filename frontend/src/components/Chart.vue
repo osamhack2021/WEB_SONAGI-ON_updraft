@@ -1,5 +1,4 @@
 <template>
-<v-layout justify-center> 
   <v-sparkline
     :value="value"
     :gradient="color"
@@ -15,7 +14,6 @@
     :labels="month"
     color="black" style="max-height: 280px;">
   </v-sparkline>
-</v-layout>
 </template>
 
 <script>

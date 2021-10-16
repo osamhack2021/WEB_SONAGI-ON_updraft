@@ -5,6 +5,7 @@
               <v-slide-group
                 mandantory
                 show-arrows
+                v-model="model"
               >
                 <v-slide-item
                     v-for="i in emotions" :key="i"
@@ -37,7 +38,6 @@ export default {
         emotions: [
         'mdi-emoticon-excited-outline',
         'mdi-emoticon-cool-outline',
-        'mdi-star-face',
         'mdi-emoticon-neutral-outline',
         'mdi-emoticon-confused-outline',
         'mdi-emoticon-angry-outline',
@@ -47,5 +47,10 @@ export default {
         'mdi-emoticon-dead-outline',
         ],
     }),
+    watch: {
+      model: function(){
+        console.log(this.model);
+      }
+    }
 }
 </script>
