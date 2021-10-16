@@ -1,9 +1,7 @@
 from django.urls import path
-from .views import ContestShowAllView, ContestShowBeforeView, ContestShowProgressView, ContestShowEndView
+from .views import ContestListView, ContestShowView
 
 urlpatterns = [
-    path("all", ContestShowAllView.as_view(), name="list-contest"),
-    path("before", ContestShowBeforeView.as_view(), name="list-contest"),
-    path("progress", ContestShowProgressView.as_view(), name="list-contest"),
-    path("end", ContestShowEndView.as_view(), name="list-contest"),
+    path("list", ContestListView.as_view(), name="list-contest"),
+    path("show", ContestShowView.as_view(), name="show-one-contest")
 ]
