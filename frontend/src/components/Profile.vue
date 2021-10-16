@@ -6,8 +6,8 @@
          </v-list-item>
          <v-list-item>
             <v-list-item-content>
-               <v-list-item-title class="text-h5 d-flex align-center justify-center">{{userdata.nickname}}</v-list-item-title>
-               <v-list-item-subtitle class="d-flex align-center justify-center">{{userdata.rank}}</v-list-item-subtitle>
+               <v-list-item-title class="text-h5 d-flex align-center justify-center">{{user.nickname}}</v-list-item-title>
+               <v-list-item-subtitle class="d-flex align-center justify-center">{{user.rank}}</v-list-item-subtitle>
             </v-list-item-content>
          </v-list-item>
          <v-list-item class="justify-center">
@@ -58,60 +58,43 @@ export default {
     UserSetting,
   },
   data: () => ({
-    userdata: {"nickname":"무명", "rank":"게스트"},
+    user: {"nickname":"무명", "rank":"게스트"},
   }),
   computed: {
-    ...mapState(['isLogin', 'access_token', 'refresh_token']),
+    ...mapState(['isLogin', 'userdata']),
   },
   methods: {
-     ...mapActions(['logout']),
-     initProfile: function() {
-       if(this.isLogin){
-        const config = {
-          headers: {
-            Authorization: `Bearer ${this.access_token}`,
-          },
-        };
-        this.axios.get(`${this.$store.state.BACKEND_URL}/api/usersetting/get`, config)
-          .then((res) => {
-            this.userdata.nickname = res.data.nickname;
-            let promotion_dates = [new Date(res.data.promotion1_date), 
-                                   new Date(res.data.promotion2_date), 
-                                   new Date(res.data.promotion3_date)];
-            let today = new Date();
-            // todo : 부사관, 장교에 대해서도 나타낼 수 있도록
-            if(res.data.type === "soldier"){
-              let ranks = ["이병", "일병", "상병", "병장"];
-              for(let i = 0; i < promotion_dates.length; i++){
-                console.log(today, promotion_dates[i]);
-                if(today < promotion_dates[i]){
-                  this.userdata.rank = ranks[i]
-                  break;
-                }
-              }
+    ...mapActions(['logout']),
+    initProfile: function() {
+      if(this.isLogin){
+        this.user.nickname = this.userdata.nickname;
+        let promotion_dates = [new Date(this.userdata.promotion1_date), 
+                                new Date(this.userdata.promotion2_date), 
+                                new Date(this.userdata.promotion3_date)];
+        let today = new Date();
+        // todo : 부사관, 장교에 대해서도 나타낼 수 있도록
+        if(this.userdata.type === "soldier"){
+          let ranks = ["이병", "일병", "상병", "병장"];
+          for(let i = 0; i < promotion_dates.length; i++){
+            console.log(today, promotion_dates[i]);
+            if(today < promotion_dates[i]){
+              this.user.rank = ranks[i]
+              break;
             }
-          })
-          .catch((error) => {
-            if(error.response.data.code === "token_not_valid"){
-              this.logout();
-              alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
-            } else {
-              this.logout();
-              alert("[PF001] 예상치 못한 에러가 발생했습니다.")
-            }
-          })
+          }
+        }
       } else {
-        this.userdata = {"nickname":"무명", "rank":"게스트"};
+        this.user = {"nickname":"무명", "rank":"게스트"};
       }
-     },
+    },
   },
   watch: {
-    isLogin: function() {
+    userdata: function() {
       this.initProfile();
-    }
+    },
   },
   created() {
     this.initProfile();
-  }
+  },
 }
 </script>

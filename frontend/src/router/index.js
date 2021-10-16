@@ -18,11 +18,6 @@ const routes = [
         component: Dashboard
     },
     {
-        path: '/dashboard',
-        name: '대시보드',
-        component: Dashboard
-    },
-    {
         path: '/diary',
         name: '나의 연대기',
         component: Diary
