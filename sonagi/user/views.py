@@ -26,15 +26,6 @@ class UserShowView(APIView):
         serializer = UserDisplaySerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-class UserUniquemailView(APIView):
-    permission_classes = [rest_framework.permissions.AllowAny]
-    def post(self, request):
-        try:
-            User.objects.get(email=request.data['email'])
-            return Response(status=status.HTTP_409_CONFLICT)
-        except User.DoesNotExist:
-            return Response(status=status.HTTP_200_OK)
-
 def google_login_redirect(request):
     """
     Code Request
