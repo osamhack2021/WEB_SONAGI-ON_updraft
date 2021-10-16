@@ -28,4 +28,6 @@ urlpatterns = [
     path("api/usersetting/", include("usersetting.urls")),
     # diary app path
     path("api/diary/", include("diary.urls")),
+    # contest app path
+    path("api/contest/", include("contest.urls")),
 ]

@@ -10,8 +10,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 
 RUN pip install django
 RUN pip install dj-rest-auth django-allauth django-rest-framework django-cors-headers djangorestframework-simplejwt
-
 RUN pip install names
+RUN pip install Pillow
 
 #!!RUN npm install -g @vue/cli
 #!!RUN npm install --save axios
