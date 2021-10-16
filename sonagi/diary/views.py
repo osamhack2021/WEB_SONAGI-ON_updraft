@@ -87,3 +87,15 @@ class DiaryListView(APIView):
         
         serializer = DiaryListSerializer(target, many=True)
         return Response(serializer.data)
+
+class DiaryShowView(APIView):
+    def post(self, request):
+        cur_user = User.objects.get(email=request.user.email)
+        try:
+            target = cur_user.diary.get(id=request.data['id'])
+            serializer = DiaryListSerializer(target)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Diary.DoesNotExist:
+            return JsonResponse({'detail': '해당하는 일기가 존재하지 않습니다.'}, status=status.HTTP_404_NOT_FOUND)
+        except:
+            return JsonResponse({'detail': '잘못된 요청입니다.'}, status=status.HTTP_400_BAD_REQUEST)
