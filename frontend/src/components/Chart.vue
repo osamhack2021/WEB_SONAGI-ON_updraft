@@ -17,7 +17,13 @@
 </template>
 
 <script>
-  const color = ['#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16),'#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16),'#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16),'#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16)]
+  const color = [
+    '#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16),
+    '#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16),
+    '#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16),
+    '#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16)
+    ]
+    
   export default {
     name: 'Chart',
           
