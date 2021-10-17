@@ -30,12 +30,6 @@
                   </v-list-item-icon>
                   <v-list-item-title>일기 쓰기</v-list-item-title>
                </v-list-item>
-               <v-list-item link to="/diary-manage">
-                  <v-list-item-icon>
-                     <v-icon>mdi-book-cog</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-title>일기 관리</v-list-item-title>
-               </v-list-item>
             </v-list>
          </v-list-group>
          <v-list-item link to="calendar">
@@ -44,12 +38,30 @@
             </v-list-item-icon>
             <v-list-item-title>캘린더</v-list-item-title>
          </v-list-item>
-         <v-list-item link to="community">
-            <v-list-item-icon>
-               <v-icon>mdi-account-group</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>커뮤니티</v-list-item-title>
-         </v-list-item>
+
+         <v-list-group
+            :value="false"
+            prepend-icon="mdi-account-group"
+            >
+            <template v-slot:activator>
+               <v-list-item-title>커뮤니티</v-list-item-title>
+            </template>
+            <v-list class="px-4">
+               <v-list-item link to="/community">
+                  <v-list-item-icon>
+                     <v-icon>mdi-view-list</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>목록</v-list-item-title>
+               </v-list-item>
+               <v-list-item link to="/community-write">
+                  <v-list-item-icon>
+                     <v-icon>mdi-lead-pencil</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>글쓰기</v-list-item-title>
+               </v-list-item>
+            </v-list>
+         </v-list-group>
+
          <v-list-item link to="event">
             <v-list-item-icon>
                <v-icon>mdi-bullhorn</v-icon>
