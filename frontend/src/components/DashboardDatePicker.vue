@@ -1,7 +1,7 @@
 <template>
   <div class="pa-2">
     <v-date-picker
-      locale="en-ko"
+      locale="ko-kr"
       v-model="date2"
       :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
       :events="functionEvents"

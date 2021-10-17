@@ -2,7 +2,7 @@
    <v-card height="350px" class="d-flex align-center justify-center">
       <v-list>
         <v-list-item>
-          <template v-if="!isLogin">
+          <template v-if="!isLogin || user.profile === null">
                 <v-icon size=150>mdi-account-circle</v-icon>
           </template>
           <template v-else>

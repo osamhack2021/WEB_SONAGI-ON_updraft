@@ -188,19 +188,11 @@ export default {
   },
   methods: {
     updateduserdata(userdata){
-      if(this.isLogin){
-        this.user = {
-            days : [userdata.enlisted_date,userdata.promotion1_date,userdata.promotion2_date,userdata.promotion3_date,userdata.delisted_date],       
-            classes : ["이등병","일병","상병","병장","민간인"],
-            type: userdata.type,
-        };
-      } else {
-        this.user = {
-          days : ['2021-09-01', '2021-10-02', '2021-10-10', '2021-10-11', '2021-11-22'],       
+      this.user = {
+          days : [userdata.enlisted_date,userdata.promotion1_date,userdata.promotion2_date,userdata.promotion3_date,userdata.delisted_date],       
           classes : ["이등병","일병","상병","병장","민간인"],
-          type: "soldier",
-        }
-      }
+          type: userdata.type,
+      };
     },
     dateDiff(a,b){
       return (a.getTime()-b.getTime())/(1000*3600*24);
