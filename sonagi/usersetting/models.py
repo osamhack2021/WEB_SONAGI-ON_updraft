@@ -1,6 +1,19 @@
 from django.db import models
+import os
+import uuid
+from django.utils.deconstruct import deconstructible
 
 # Create your models here.
+
+@deconstructible
+class RandomFileName(object):
+    def __init__(self, path):
+        self.path = os.path.join(path, "%s%s")
+
+    def __call__(self, _, filename):
+        # @note It's up to the validators to check if it's the correct file type in name or if one even exist.
+        extension = os.path.splitext(filename)[1]
+        return self.path % (uuid.uuid4(), extension)
 
 major_choices = (
     ('army', "육군"),
@@ -18,7 +31,7 @@ type_choices = (
 class UserSetting(models.Model):
     email = models.ForeignKey("user.User", related_name="setting", to_field="email", on_delete=models.CASCADE, db_column="email")
     nickname = models.CharField(verbose_name="닉네임", max_length=20, null=False, unique=True)
-    profile = models.ImageField(verbose_name="프로필 이미지", upload_to="profile/", blank=True)
+    profile = models.ImageField(verbose_name="프로필 이미지", upload_to=RandomFileName("profile"), blank=True)
     major = models.CharField(verbose_name="군 구분", max_length=10, choices=major_choices, null=False)
     type = models.CharField(verbose_name="복무 구분", max_length=10, choices=type_choices, null=False)
     enlisted_date = models.DateField(verbose_name="입대일(임관일)", null=False)
