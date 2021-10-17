@@ -10,7 +10,7 @@ from django.db.models import Q
 
 class UserSettingReviseView(APIView):
     def post(self, request):
-        # request : some of {"nickname", "major", "type", "enlisted_date", "delisted_date", "promotion1_date", "promotion2_date", "promotion3_date"}
+        # request : some of {"nickname", "profile", "major", "type", "enlisted_date", "delisted_date", "promotion1_date", "promotion2_date", "promotion3_date"}
         # permission : logined user  
         try:
             target = UserSetting.objects.get(email=request.user.email)

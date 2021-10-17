@@ -18,6 +18,7 @@ type_choices = (
 class UserSetting(models.Model):
     email = models.ForeignKey("user.User", related_name="setting", to_field="email", on_delete=models.CASCADE, db_column="email")
     nickname = models.CharField(verbose_name="닉네임", max_length=20, null=False, unique=True)
+    profile = models.ImageField(verbose_name="프로필 이미지", upload_to="profile/", blank=True)
     major = models.CharField(verbose_name="군 구분", max_length=10, choices=major_choices, null=False)
     type = models.CharField(verbose_name="복무 구분", max_length=10, choices=type_choices, null=False)
     enlisted_date = models.DateField(verbose_name="입대일(임관일)", null=False)
