@@ -5,9 +5,10 @@
       type="image"
     > </v-skeleton-loader>
     <LineChart
+      :height="100"
       v-else-if="isLoaded"
       :chartdata="chartdata"
-      :options="{}">
+      :options="options">
     </LineChart>
   </div>
 </template>
@@ -21,9 +22,13 @@ export default {
   name: 'DiaryChart',
   data: () => ({
     isLoaded: false,
-    chartdata: {},    
+    chartdata: {"labels":[], "datasets": [{"label":"","borderColor": '#FC2525', "data":[]}]},    
     value: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    month: ["입대", "4월", "5월", "6월", "7월", "8월","9월", "10월", "11월", "12월", "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월","전역"]
+    options: {
+      legend: {
+          display: false
+      },
+    }
   }),
   computed: {
     ...mapState(['isLogin', 'userdata', 'access_token']),
@@ -34,12 +39,12 @@ export default {
       let delisted_date = new Date(this.userdata.delisted_date);
       enlisted_date.setDate(1);
       delisted_date.setDate(1);
-      this.month = ["입대"];
+      this.chartdata.labels = ["입대"];
       while(enlisted_date < delisted_date){
         enlisted_date.setMonth(enlisted_date.getMonth() + 1);
-        this.month.push((enlisted_date.getMonth()+1)+"월");
+        this.chartdata.labels.push((enlisted_date.getMonth()+1)+"월");
       }
-      this.month[this.month.length-1] = "전역";
+      this.chartdata.labels[this.chartdata.labels.length-1] = "전역";
       const config = {
         headers: {
           Authorization: `Bearer ${this.access_token}`,
@@ -51,12 +56,10 @@ export default {
           for(let i = 0; i < res.data.length; i++){
             let tmp = new Date(res.data[i]['write_date']);
             tmp = (tmp.getMonth()+1)+"월";
-            console.log(tmp);
-            let idx = this.month.findIndex((val) => val.includes(tmp));
+            let idx = this.chartdata.labels.findIndex((val) => val.includes(tmp));
             this.value[idx] += 1;
           }
-          this.chartdata.labels = this.month;
-          this.chartdata.datasets = this.value;
+          this.chartdata.datasets[0].data= this.value;
           this.isLoaded = true;
         })
     }
