@@ -58,7 +58,6 @@ class DiaryDeleteView(APIView):
         target.delete()
         return JsonResponse({"result":"success"}, status=status.HTTP_200_OK)
 
-
 class DiaryListView(APIView):
     def get(self, request):
         # request : nothing

@@ -12,7 +12,7 @@ from rest_framework import status
 from json.decoder import JSONDecodeError
 from django.http import JsonResponse
 from allauth.socialaccount.models import SocialAccount
-from sonagi.utils import initialize_usersetting
+from .utils import initialize_usersetting
 import rest_framework
 
 # Create your views here.

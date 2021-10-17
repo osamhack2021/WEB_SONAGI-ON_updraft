@@ -1,30 +1,15 @@
-import names
-import datetime
-from django.contrib.auth import get_user_model
-from usersetting.models import UserSetting
+import os
+import uuid
+from django.utils.deconstruct import deconstructible
 
 # util functions for project
 
-User = get_user_model()
+@deconstructible
+class RandomFileName(object):
+    def __init__(self, path):
+        self.path = os.path.join(path, "%s%s")
 
-def initialize_usersetting(email):
-    while(True):
-        try:
-            nickname = names.get_first_name()
-            UserSetting.objects.get(nickname=nickname)
-        except:
-            break
-    enlisted_date = datetime.datetime.now().strftime("%Y-%m-%d")
-    delisted_date = (datetime.datetime.now() + datetime.timedelta(days=548)).strftime("%Y-%m-%d")
-    promotion1_date = (datetime.datetime.now() + datetime.timedelta(days=60)).strftime("%Y-%m-%d")
-    promotion2_date = (datetime.datetime.now() + datetime.timedelta(days=240)).strftime("%Y-%m-%d")
-    promotion3_date = (datetime.datetime.now() + datetime.timedelta(days=400)).strftime("%Y-%m-%d")
-    UserSetting.objects.create(email=User.objects.get(email=email),
-                               nickname=nickname,
-                               major='army',
-                               type='soldier',
-                               enlisted_date=enlisted_date,
-                               delisted_date=delisted_date,
-                               promotion1_date=promotion1_date,
-                               promotion2_date=promotion2_date,
-                               promotion3_date=promotion3_date)
+    def __call__(self, _, filename):
+        # @note It's up to the validators to check if it's the correct file type in name or if one even exist.
+        extension = os.path.splitext(filename)[1]
+        return self.path % (uuid.uuid4(), extension)

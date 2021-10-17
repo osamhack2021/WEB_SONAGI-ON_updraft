@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'usersetting',
     'diary',
     'contest',
+    'community',
 ]
 
 MIDDLEWARE = [
