@@ -369,7 +369,6 @@ export default {
              v => !!v || 'Day is required',
             v=> /^[0-9-]*$/.test(v) || '형식에 맞춰서 입력해주세요'
         ],
-        dialogs: false,
         vType : [
             "포상","보상","위로","청원","정기","외박","기타"
         ],
@@ -381,6 +380,7 @@ export default {
             type: 0,
             day : "",
             dialog: false,
+            dialogs:false,
             termS : {tag:"",idx:0},
             usedS : {tag:"",idx:0}
         }
