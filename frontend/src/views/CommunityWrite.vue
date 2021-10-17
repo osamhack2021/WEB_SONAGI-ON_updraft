@@ -1,10 +1,10 @@
-<template lang="">
+<template>
     <div>
     <v-card class="group pa-2">
       <v-icon small style="margin-left:5px">home</v-icon>
       <v-breadcrumbs :items="bcLink"></v-breadcrumbs>
     </v-card>
-        
+        Community page
     </div>
 </template>
 <script>
@@ -17,19 +17,15 @@ export default {
              href: 'Dashboard',
            },
            {
-             text: '일기',
+             text: '커뮤니티',
              disabled: false,
-             href: 'diary',
-           },
-           {
-             text: '일기 관리',
-             disabled: false,
-             href: 'diary-manage',
+             href: 'commu7nity',
            },
          ],
     }),
+    
 }
 </script>
-<style lang="">
+<style>
     
 </style>

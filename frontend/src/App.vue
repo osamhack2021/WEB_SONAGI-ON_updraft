@@ -29,7 +29,7 @@
       <!-- Sizes your content based upon application components -->
       <v-main class="pf-8">
          <v-card
-         class="mx-auto"
+         class="mx-auto elevation-0"
          >
             <router-view />
          </v-card>
