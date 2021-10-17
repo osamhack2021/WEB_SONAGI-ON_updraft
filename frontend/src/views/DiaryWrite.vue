@@ -55,7 +55,7 @@ export default {
       {
         text: '대시보드',
         disabled: false,
-        href: 'Dashboard',
+        href: '/',
       },
       {
         text: '일기',

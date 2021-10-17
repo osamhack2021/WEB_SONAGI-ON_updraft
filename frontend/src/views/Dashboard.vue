@@ -42,7 +42,7 @@
            {
              text: '대시보드',
              disabled: false,
-             href: 'Dashboard',
+             href: '/',
            },
          ],
     }),
