@@ -65,7 +65,7 @@ class PostRewriteView(APIView):
         except:
             return JsonResponse({'detail': '잘못된 요청입니다.'}, status=status.HTTP_400_BAD_REQUEST)
         
-        serializer = PostRewriteSerializer(target, data=request.data)
+        serializer = PostRewriteSerializer(target, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({"result":"success"}, status=status.HTTP_205_RESET_CONTENT)

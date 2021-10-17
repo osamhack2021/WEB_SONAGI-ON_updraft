@@ -21,3 +21,6 @@ class Contest(models.Model):
     start_date = models.DateField(verbose_name="접수기간(시작)")
     end_date =models.DateField(verbose_name="접수기간(종료)")
     contest_status = models.CharField(verbose_name="상태", max_length=20, choices=status_choice, null=False)
+
+    def __str__(self):
+        return self.title

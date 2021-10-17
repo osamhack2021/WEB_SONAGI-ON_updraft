@@ -16,6 +16,9 @@ from sonagi.utils import RandomFileName
 class Board(models.Model):
     name = models.CharField(verbose_name="게시판 이름", max_length=20, null=False)
 
+    def __str__(self):
+        return self.name
+
 # 게시글을 저장해 두는 모델
 class Post(models.Model):
     board_id = models.ForeignKey(Board, related_name="post", on_delete=models.CASCADE, db_column="board_id")
@@ -27,6 +30,9 @@ class Post(models.Model):
     write_date = models.DateTimeField(verbose_name="작성 일자", default=timezone.now)
     rewrite_date = models.DateTimeField(verbose_name="최종 수정 일자", auto_now=True)
 
+    def __str__(self):
+        return self.title
+
 
 # 댓글을 저장해 두는 모델
 class Comment(models.Model):
@@ -35,3 +41,6 @@ class Comment(models.Model):
     content = models.CharField(verbose_name="내용", max_length=2000, null=True)
     write_date = models.DateTimeField(verbose_name="작성 일자", default=timezone.now)
     rewrite_date = models.DateTimeField(verbose_name="최종 수정 일자", auto_now=True)
+
+    def __str__(self):
+        return self.content

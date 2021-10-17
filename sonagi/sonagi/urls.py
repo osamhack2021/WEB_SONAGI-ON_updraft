@@ -32,4 +32,6 @@ urlpatterns = [
     path("api/diary/", include("diary.urls")),
     # contest app path
     path("api/contest/", include("contest.urls")),
+    # community app path
+    path("api/community/", include("community.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
