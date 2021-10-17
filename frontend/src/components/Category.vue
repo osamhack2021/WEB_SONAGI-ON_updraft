@@ -62,6 +62,12 @@
             </v-list-item-icon>
             <v-list-item-title>자기관리</v-list-item-title>
          </v-list-item>
+         <v-list-item link to="vacation">
+            <v-list-item-icon>
+               <v-icon>mdi-airplane-settings</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>휴가 관리</v-list-item-title>
+         </v-list-item>
       </v-list>
    </v-card>
 </template>

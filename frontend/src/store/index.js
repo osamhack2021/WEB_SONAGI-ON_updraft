@@ -32,9 +32,6 @@ export default new Vuex.Store({
       state.access_token = "";
       state.refresh_token = "";
     },
-    updateUserdata(state, payload){
-      state.userdata = payload;
-    },
   },
   actions: {
     login({ commit }, loginObj) {

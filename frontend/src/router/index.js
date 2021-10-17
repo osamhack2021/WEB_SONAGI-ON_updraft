@@ -8,7 +8,7 @@ import Calendar from '@/views/Calendar'
 import Community from '@/views/Community'
 import Event from '@/views/Event'
 import SelfCare from '@/views/SelfCare'
-
+import Vacation from '@/views/Vacation'
 Vue.use(VueRouter)
 
 const routes = [
@@ -51,6 +51,11 @@ const routes = [
         path: '/self-care',
         name: '자기관리',
         component: SelfCare
+    },
+    {
+        path: '/vacation',
+        name: '휴가관리',
+        component: Vacation
     },
 ]
 
