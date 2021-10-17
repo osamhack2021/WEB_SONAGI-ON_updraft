@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 # https://brownbears.tistory.com/71 partial update
 class UserSettingSerializer(serializers.ModelSerializer):
-    profile = serializers.ImageField(use_url=True)
+    profile = serializers.ImageField(use_url=True, required=False, allow_null=True)
 
     class Meta:
         model = UserSetting
