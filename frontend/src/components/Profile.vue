@@ -56,9 +56,9 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import LoginDialog from './LoginDialog.vue'
-import Register from './Register.vue'
-import UserSetting from './UserSetting.vue'
+import LoginDialog from './side_modules/LoginDialog.vue'
+import Register from './side_modules/Register.vue'
+import UserSetting from './side_modules/UserSetting.vue'
 
 export default {
   name: 'Profile',

@@ -18,7 +18,7 @@
             <div>
               일기 쓴 횟수
             </div>
-            <Chart />
+            <DiaryChart />
           </v-card>
         </v-flex>
         <v-flex
@@ -38,7 +38,7 @@
 
 <script>
   import RetireCalculator from '../components/RetireCalculator'
-  import Chart from '../components/Chart'
+  import DiaryChart from '../components/DiaryChart'
   import DashboardDatePicker from '../components/DashboardDatePicker'
 
   export default {
@@ -56,7 +56,7 @@
 
     components: {
       RetireCalculator,
-      Chart,
+      DiaryChart,
       DashboardDatePicker,
     },
   }

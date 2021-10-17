@@ -44,7 +44,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import Emotions from '../components/Emotions'
+import Emotions from '../components/side_modules/Emotions'
 
 export default {
   components: {
