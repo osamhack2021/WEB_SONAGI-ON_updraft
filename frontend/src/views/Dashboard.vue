@@ -10,26 +10,26 @@
     <v-divider></v-divider>
     <v-row class="pa-4">
       <v-layout row>
-      <v-flex
-        grow
-        ma-4
-      >
-      <v-card class="pa-3">
-        <div>
-          일기 쓴 횟수
-        </div>
-        <Chart />
-      </v-card>
-      </v-flex>
-      <v-flex
-        shrink
-      >
-      <v-card class="col-3 ma-4" style="max-width: 300px;">
-        <v-layout justify-center>
-        <DashboardDatePicker />
-        </v-layout>
-      </v-card>
-      </v-flex>
+        <v-flex
+          grow
+          ma-4
+        >
+          <v-card class="pa-3">
+            <div>
+              일기 쓴 횟수
+            </div>
+            <Chart />
+          </v-card>
+        </v-flex>
+        <v-flex
+          shrink
+        >
+          <v-card class="col-3 ma-4" style="max-width: 300px;">
+              <v-layout justify-center>
+              <DashboardDatePicker />
+              </v-layout>
+          </v-card>
+        </v-flex>
       </v-layout>
     </v-row>
     <v-divider></v-divider>

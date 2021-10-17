@@ -17,6 +17,7 @@
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",
     "vue-router": "^3.5.2",
+    "vue-simple-alert": "^1.1.1",
     "vuetify": "^2.4.0",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"

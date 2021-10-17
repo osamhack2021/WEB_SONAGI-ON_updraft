@@ -32,6 +32,7 @@
 
     
 export default {
+  props: ['propEmotion'],
   data:()=>({
       model: null,
       
@@ -50,6 +51,12 @@ export default {
   watch: {
     model: function(val){
       this.$emit('emotion-extract', this.emotions[val].split('-')[2]);
+    }
+  },
+  created() {
+    this.model = this.emotions.findIndex(val => val.includes(this.propEmotion));
+    if (this.model === -1) {
+      this.model = null;
     }
   }
 }

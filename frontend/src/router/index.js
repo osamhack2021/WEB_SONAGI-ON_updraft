@@ -20,7 +20,7 @@ const routes = [
     {
         path: '/diary',
         name: '나의 연대기',
-        component: Diary
+        component: Diary,
     },
     {
         path: '/diary-write',

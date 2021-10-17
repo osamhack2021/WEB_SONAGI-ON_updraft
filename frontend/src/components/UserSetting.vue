@@ -30,7 +30,7 @@
                   readonly
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="6">
                 <v-text-field
                   name="password"
                   label="패스워드"
@@ -38,7 +38,7 @@
                   type="password"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="6">
                 <v-text-field
                   name="password2"
                   label="패스워드 확인"
@@ -47,13 +47,23 @@
                   :rules="passwordRules2"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="6">
                 <v-text-field
                   name="nickname"
                   label="닉네임"
                   v-model="nickname"
                   :rules="nicknameRules"
                 ></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-file-input
+                  accept="image/png, image/jpeg, image/bmp"
+                  placeholder="프로필 이미지를 선택해 주세요."
+                  prepend-icon="mdi-camera"
+                  label="프로필"
+                  v-model="profile"
+                  :rules="profileRules"
+                ></v-file-input>
               </v-col>
               <v-col cols="6">
                 <v-select
@@ -162,6 +172,10 @@ export default {
         v => v.length > 1 || '닉네임은 2자 이상이어야 합니다.',
         v => v.length < 16 || '닉네임은 15자 이하여야 합니다.',
       ],
+      profile: null,
+      profileRules: [
+        v => !!v || v.size < 2000000 || '프로필 이미지 크기는 2MB를 넘을 수 없습니다.',
+      ],
       major: { state: '', abbr: '' },
       major_items: [
         { state: '육군', abbr: 'army' },
@@ -207,18 +221,22 @@ export default {
           Authorization: `Bearer ${this.access_token}`,
         },
       };
-      const updateObj = {"nickname":this.nickname,
-                         "major":this.major.abbr,
-                         "type":this.type.abbr,
-                         "enlisted_date":this.enlisted_date,
-                         "delisted_date":this.delisted_date,
-                         "promotion1_date":this.promotion1_date,
-                         "promotion2_date":this.promotion2_date,
-                         "promotion3_date":this.promotion3_date,}
-      this.axios.post(`${this.$store.state.BACKEND_URL}/api/usersetting/revise`, updateObj, config)
+      let formdata = new FormData();
+      formdata.append("nickname", this.nickname);
+      if (this.profile !== null){
+        formdata.append("profile", this.profile);
+      }
+      formdata.append("major", this.major.abbr);
+      formdata.append("type", this.type.abbr);
+      formdata.append("enlisted_date", this.enlisted_date);
+      formdata.append("delisted_date", this.delisted_date);
+      formdata.append("promotion1_date", this.promotion1_date);
+      formdata.append("promotion2_date", this.promotion2_date);
+      formdata.append("promotion3_date", this.promotion3_date);
+      this.axios.post(`${this.$store.state.BACKEND_URL}/api/usersetting/revise`, formdata, config)
         .then(() => {
           this.updateUserdata();
-          alert("성공적으로 변경되었습니다.");
+          this.$alert("성공적으로 변경되었습니다.","","success");
         })
         .catch(() => {
           this.updateUserdata();

@@ -60,7 +60,7 @@ export default new Vuex.Store({
           })
           .catch(() => {
             this.dispatch('logout');
-            alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
+            this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
           });
       }
     },
@@ -82,10 +82,10 @@ export default new Vuex.Store({
         .catch((error) => {
           if(error.response.data.code === "token_not_valid"){
             this.dispatch('logout');
-            alert("세션이 만료되었습니다. 다시 로그인 해주세요.");
+            this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
           } else {
             this.dispatch('logout');
-            alert("[STORE001] 예상치 못한 에러가 발생했습니다.")
+            this.$alert("[STORE001] 예상치 못한 에러가 발생했습니다.","","error");
           }
         })
     }

@@ -18,6 +18,7 @@
     ></v-text-field>
     </template>
     <v-date-picker
+      locale="ko-kr"
       v-model="date"
       @input="menu=false"
       :show-current="false"
@@ -37,12 +38,11 @@ export default {
   computed: { 
     date: { 
       get () { 
-        console.log('get') 
-        return this.propDate 
+        return this.propDate;
       }, 
       set (newDate) { 
         let type = this.type;
-        this.$emit('date-extract', {type, newDate}) 
+        this.$emit('date-extract', {type, newDate});
       } 
     } 
   },
