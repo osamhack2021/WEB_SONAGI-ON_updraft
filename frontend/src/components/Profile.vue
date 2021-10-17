@@ -94,7 +94,7 @@ export default {
           }
         }
       } else {
-        this.user = {"nickname":"무명", "rank":"게스트"};
+        this.user = {"nickname":"무명", "rank":"게스트", "profile":null};
       }
     },
   },

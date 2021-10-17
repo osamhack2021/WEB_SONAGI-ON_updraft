@@ -65,11 +65,15 @@ export default {
     }
   },
   created() {
-    this.updateChart();
+    if(this.isLogin){
+      this.updateChart();
+    }
   },
   watch: {
     userdata: function() {
-      this.updateChart();
+      if(this.isLogin){
+        this.updateChart();
+      }
     },
   },
 }
