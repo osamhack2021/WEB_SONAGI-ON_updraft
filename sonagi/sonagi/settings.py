@@ -149,7 +149,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # cors header setting
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
-    "https://osamhack2021-web-sonagi-on-updraft-w6v96r5qcgpww-8080.githubpreview.dev"
+    "https://osamhack2021-web-sonagi-on-updraft-w6v96r5qcgpww-8080.githubpreview.dev",
+    "https://revlr-osamhack2021-web-sonagi-on-updraft-59q59xj627rp4-8080.githubpreview.dev"
 ]
 CORS_ALLOW_METHODS = (
     'DELETE',
