@@ -34,4 +34,6 @@ urlpatterns = [
     path("api/contest/", include("contest.urls")),
     # community app path
     path("api/community/", include("community.urls")),
+    # vacation app path
+    path("api/vacation/", include("vacation.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

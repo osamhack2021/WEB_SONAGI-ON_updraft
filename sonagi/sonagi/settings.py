@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'diary',
     'contest',
     'community',
+    'vacation'
 ]
 
 MIDDLEWARE = [
