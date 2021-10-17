@@ -1,19 +1,33 @@
 <template>
-    <v-card class="elevation-0">
-    <v-toolbar class="elevation-2">
-    <v-toolbar-title>D-{{Math.floor(remainDays)}}</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-title>전역일 계산기</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-title id="title">입대일: {{user.days[0]}}<br/>전역일: {{user.days[4]}}</v-toolbar-title>
-    </v-toolbar>
+  <v-card class="elevation-0">
+  <v-toolbar class="elevation-2">
+  <template>
+    <v-toolbar-title v-if="!isLogin">D-??</v-toolbar-title>
+    <v-toolbar-title v-else>D-{{Math.floor(remainDays)}}</v-toolbar-title>
+  </template>
+  <v-spacer></v-spacer>
+  <v-toolbar-title>전역일 계산기</v-toolbar-title>
+  <v-spacer></v-spacer>
+  <template>
+    <v-toolbar-title v-if="!isLogin" id="title">
+      입대일: 0000-00-00<br/>전역일: 0000-00-00
+    </v-toolbar-title>
+    <v-toolbar-title v-else id="title">
+      입대일: {{user.days[0]}}<br/>전역일: {{user.days[4]}}
+    </v-toolbar-title>
+  </template>
+  </v-toolbar>
     
   <v-divider></v-divider>
     <v-container fluid class="pt-5">
         <div>
             <v-row>
                 <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
-                    <v-card>
+                    <v-skeleton-loader
+                      v-if="!isLogin"
+                      type="image"
+                    > </v-skeleton-loader>
+                    <v-card v-else>
                         <v-row class="no-gutters">
                             <div class="col-auto">
                                 <div class="cyan fill-height">&nbsp;</div>
@@ -33,7 +47,6 @@
                                 :width="7" 
                                 :value="discharge_P" 
                                 color="cyan">
-
                                 </v-progress-linear>
                             </div>
                         </v-row>
@@ -41,7 +54,11 @@
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
-                    <v-card>
+                    <v-skeleton-loader
+                      v-if="!isLogin"
+                      type="image"
+                    > </v-skeleton-loader>
+                    <v-card v-else>
                         <v-row class="no-gutters">
                             <div class="col-auto">
                                 <div class="primary fill-height">&nbsp;</div>
@@ -68,7 +85,11 @@
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
-                    <v-card>
+                    <v-skeleton-loader
+                      v-if="!isLogin"
+                      type="image"
+                    > </v-skeleton-loader>
+                    <v-card v-else>
                         <v-row class="no-gutters">
                             <div class="col-auto">
                                 <div class="success fill-height">&nbsp;</div>
@@ -88,8 +109,12 @@
                     </v-card>
                 </v-col>
                 <v-spacer></v-spacer>
-                <v-col v-show="(!nmHouse && user.type=='soldier')" lg="3" md="3" sm="6" xs="12" class="pb-2">
-                    <v-card>
+                <v-col v-show="(!nmHouse)" lg="3" md="3" sm="6" xs="12" class="pb-2">
+                    <v-skeleton-loader
+                      v-if="!isLogin"
+                      type="image"
+                    > </v-skeleton-loader>
+                    <v-card v-else>
                         <v-row class="no-gutters">
                             <div class="col-auto">
                                 <div class="error fill-height">&nbsp;</div>
@@ -163,19 +188,11 @@ export default {
   },
   methods: {
     updateduserdata(userdata){
-      if(this.isLogin){
-        this.user = {
-            days : [userdata.enlisted_date,userdata.promotion1_date,userdata.promotion2_date,userdata.promotion3_date,userdata.delisted_date],       
-            classes : ["이등병","일병","상병","병장","민간인"],
-            type: userdata.type,
-        };
-      } else {
-        this.user = {
-          days : ['2021-09-01', '2021-10-02', '2021-10-10', '2021-10-11', '2021-11-22'],       
+      this.user = {
+          days : [userdata.enlisted_date,userdata.promotion1_date,userdata.promotion2_date,userdata.promotion3_date,userdata.delisted_date],       
           classes : ["이등병","일병","상병","병장","민간인"],
-          type: "soldier",
-        }
-      }
+          type: userdata.type,
+      };
     },
     dateDiff(a,b){
       return (a.getTime()-b.getTime())/(1000*3600*24);
@@ -189,7 +206,6 @@ export default {
     updateRcData(){
       var ui = this.user;
       var tmp = []; //진급일 배열을 임시로 저장할 배열
-      console.log(tmp);
       var idx = 0;  // 사용자의 현재 계급의 인덱스
       var today = new Date(); 
       ui.days.forEach((item)=> {         //tmp를 date객체를 가진 배열로 만들어 준다.

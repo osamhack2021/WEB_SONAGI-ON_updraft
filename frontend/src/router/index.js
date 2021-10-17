@@ -3,9 +3,9 @@ import VueRouter from 'vue-router'
 import Dashboard from '@/views/Dashboard'
 import Diary from '@/views/Diary'
 import DiaryWrite from '@/views/DiaryWrite'
-import DiaryManage from '@/views/DiaryManage'
 import Calendar from '@/views/Calendar'
 import Community from '@/views/Community'
+import CommunityWrite from '@/views/CommunityWrite'
 import Event from '@/views/Event'
 import SelfCare from '@/views/SelfCare'
 import Vacation from '@/views/Vacation'
@@ -20,17 +20,12 @@ const routes = [
     {
         path: '/diary',
         name: '나의 연대기',
-        component: Diary
+        component: Diary,
     },
     {
         path: '/diary-write',
         name: '일기 쓰기',
         component: DiaryWrite
-    },
-    {
-        path: '/diary-manage',
-        name: '일기 관리',
-        component: DiaryManage
     },
     {
         path: '/calendar',
@@ -41,6 +36,11 @@ const routes = [
         path: '/community',
         name: '커뮤니티',
         component: Community
+    },
+    {
+        path: '/community-write',
+        name: '커뮤니티',
+        component: CommunityWrite
     },
     {
         path: '/event',

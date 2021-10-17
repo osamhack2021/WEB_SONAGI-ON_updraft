@@ -18,10 +18,6 @@
                      <v-toolbar dark color="grey darken-2 white--text">
                         <v-toolbar-title>Login</v-toolbar-title>
                      </v-toolbar>
-                     <v-alert
-                      type="error"
-                      v-model="loginerror"
-                    > 존재하지 않는 계정입니다. </v-alert>
                      <v-card-text>
                         <v-form ref="loginform">
                            <v-text-field
@@ -69,7 +65,6 @@ export default {
       v => !!v || '패스워드는 필수 항목입니다.',
     ],
     dialog: false,
-    loginerror: false,
   }),
   methods: {
     ...mapActions(['login']),
@@ -78,7 +73,7 @@ export default {
       if (is_valid){
         this.login(loginobj)
           .catch(() => {
-            this.loginerror = true;
+            this.$alert("존재하지 않는 계정입니다.","","error");
           })
       }
     },
@@ -87,7 +82,6 @@ export default {
     dialog: function(val){
       if (!val){
         this.$refs.loginform.reset();
-        this.loginerror = false;
       }
     }
   }

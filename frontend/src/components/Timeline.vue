@@ -1,25 +1,30 @@
 <template>
 <v-layout align-center justify-center row fill-height class="py-8 px-4">
   <v-card class="py-8 px-4 ma-4" style="max-width: 900px;">
-      <div class="scroll-box">  
+      <div class="scroll-box">
         <v-timeline dense v-for="(v,k) in diaryData" :key="k">
           <a class="disablePointe ma-4" :name="k"></a>
           <div class="margin"></div>
           <v-card class="pa-2 ma-4" style="width: 150px; text-align: center;" color="blue-grey lighten-4">{{k}}</v-card>
-          <v-timeline-item v-for="item in v" :key="item" :icon="item.emotion" :color="'#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16)">
+          <v-timeline-item v-for="item in v" :key="item" :icon="'mdi-emoticon-'+item.emotion+'-outline'" :color="'#'+((Math.random()*0xFFFFFF<<0)%0xFFFFFF).toString(16)">
             <v-card class="pa-2 ma-2">
               <v-layout align-center justify-space-between row fill-height class="pa-2 ma-2">
               <v-card-title>{{item.title}}</v-card-title>
-              <v-btn depressed color="white" link to="/diary-write"> 
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
+              <div>
+                <v-btn depressed color="white" link :to="'/diary-write?id='+item.id"> 
+                  <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn depressed color="white" @click="deleteDiary(item.id)"> 
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </div>
               
               </v-layout>
               <v-card class="pa-2 ma-2" :elevation="0">
               {{item.content}}
               </v-card>
               
-              <div class="text-right">{{item.published_at}}</div>
+              <div class="text-right">{{item.write_date}}</div>
             </v-card>
           </v-timeline-item>
         </v-timeline>
@@ -30,75 +35,39 @@
 </template>
 
 <script>
-  export default {
-    name: 'Timeline',
+import { mapState, mapActions } from 'vuex'
 
-    data: () => ({
-      diaryData: {
-      'August, 2020': [
-        {
-          title: '입대',
-          content: 'holy-shit',
-          emotion: 'mdi-emoticon-dead-outline',
-          published_at: '2020-08-24'
-        },
-      ],
-      'November, 2020': [
-        {
-          title: '일병 진급',
-          content: '좋긴 한데.... 아직 한참남았네? 이제 시작인가?',
-          emotion: 'mdi-emoticon-excited-outline',
-          published_at: '2020-11-01'
-        },
-        {
-          title: '생일',
-          content: '군대에서 생일이라니. 카톡으로 선물은 많이 받았지만 군대라서 기분은 썩 좋지 않다. 선물이 무슨 의미야! 쓰지도 못하는데! 퓨..',
-          emotion: 'mdi-emoticon-angry-outline',
-          published_at: '2020-11-20'
-        },
-      ],
-      'May, 2021': [
-        {
-          title: '상병 진급',
-          content: '좋긴 한데.... 아직 반도 안했네? 언제 집가지?',
-          emotion: 'mdi-emoticon-cool-outline',
-          published_at: '2021-05-01'
-        },
-        {
-          title: '청원 휴가를 나갔다',
-          content: '결국 스노우볼이 이렇게 흘러 인대 파열로 수술을 하게 됐다. 마음이 좋진 않지만 빨리 회복 하고 다시 돌아올 수 있으면 좋겠다.',
-          emotion: 'mdi-emoticon-neutral-outline',
-          published_at: '2021-05-04'
-        },
-      ],
-      'October, 2021': [
-        {
-          title: '군장병 해커톤 화이팅',
-          content: '오늘은 해커톤 대회 준비를 하는 중에 이발병에게 카톡이와서 머리를 자르고 왔더니 격리를 하래서 대회 준비를 못했다. 내일 결과가 나올까? 심란하다. 아직 다 준비가 안됐는데 ㅅㅂ ㅈ됐다. 이러다가 대회 마무리 못하면 ㅈㄷㅎ중사님 각오하십쇼',
-          emotion: 'mdi-emoticon-confused-outline',
-          published_at: '2021-10-11'
-        }
-      ]
+export default {
+  props: ['diaryData'],
+  name: 'Timeline',
+  data: () => ({
+  }),
+  computed: {
+    ...mapState(['access_token']),
+  },
+  methods: {
+    ...mapActions(['logout']),
+    deleteDiary: function(id){
+      this.$confirm("삭제 하시겠습니까? 되돌릴 수 없습니다.").then(() => {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${this.access_token}`,
+          },
+        };
+        this.axios
+          .post(`${this.$store.state.BACKEND_URL}/api/diary/delete`, {id}, config)
+          .then(() => {
+            this.$emit('reload');
+            this.$alert("성공적으로 삭제되었습니다.","","success");
+          })
+          .catch(() => {
+            this.logout();
+            this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
+          });
+      });
     }
-    /*
-    title (한줄평)
-    content (내용)
-    emotion (감정 : 행복, 보통, 별로, 슬픔 등)
-      mdi-emoticon-angry-outline
-      mdi-emoticon-confused-outline
-      mdi-emoticon-cool-outline
-      mdi-emoticon-cry-outline
-      mdi-emoticon-dead-outline
-      mdi-emoticon-excited-outline
-      mdi-emoticon-neutral-outline
-      mdi-emoticon-sad-outline
-      mdi-emoticon-sick-outline
-      mdi-star-face
-    write_date (작성 일시)
-    rewrite_date (마지막 수정 일자) */
-    }),
-    
   }
+}
 </script>
 
 <style>

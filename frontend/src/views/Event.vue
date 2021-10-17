@@ -4,11 +4,19 @@
       <v-icon small style="margin-left:5px">home</v-icon>
       <v-breadcrumbs :items="bcLink"></v-breadcrumbs>
     </v-card>
-        Event page
+      <ContestGroup />
+      <EventGroup />
     </div>
 </template>
 <script>
+import ContestGroup from '../components/ContestGroup'
+import EventGroup from '../components/EventGroup'
+
 export default {
+  components: { 
+    ContestGroup,
+    EventGroup,
+    },
     data: ()=> ({
       bcLink: [
            {
@@ -22,8 +30,8 @@ export default {
              href: 'event',
            },
          ],
+      
     }),
-    
 }
 </script>
 <style>

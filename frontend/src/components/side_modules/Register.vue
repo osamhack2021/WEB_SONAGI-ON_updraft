@@ -102,20 +102,20 @@ export default {
     }
   },
   methods: {
-    async register(signupObj){
+    register(signupObj){
       if (this.$refs.registerform.validate()){
         this.axios
           .post(`${this.$store.state.BACKEND_URL}/api/user/registration`, signupObj)
           .then(() => {
             this.dialog = false
-            alert(`회원가입에 성공했습니다.\n설정에서 회원 정보를 변경하실 수 있습니다.`);
+            this.$alert("회원가입에 성공했습니다. 설정에서 회원 정보를 변경하실 수 있습니다.","","success");
           })
           .catch((error) => {
-            if(error.response.data.email){
+            if(error.response !== undefined && error.response.data.email){
               this.emailunique = false;
               this.$refs.registerform.validate();
             } else {
-              alert('예상치 못한 문제가 발생했습니다.\n고객센터로 문의 바랍니다.');
+              this.$alert('[RG001] 예상치 못한 문제가 발생했습니다. 고객센터로 문의 바랍니다.',"","error");
             }
           });
       }

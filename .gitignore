@@ -4,7 +4,7 @@ sonagi/secret.json
 frontend/.DS_Store
 frontend/node_modules
 /dist
-
+test
 
 # local env files
 frontend/.env.local

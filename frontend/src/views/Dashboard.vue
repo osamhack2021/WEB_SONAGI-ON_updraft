@@ -9,28 +9,21 @@
     </div>
     <v-divider></v-divider>
     <v-row class="pa-4">
-      <v-layout row>
-      <v-flex
-        grow
-        ma-4
-      >
-      <v-card class="pa-3">
-        <div>
-          일기 쓴 횟수
-        </div>
-        <Chart />
-      </v-card>
-      </v-flex>
-      <v-flex
-        shrink
-      >
-      <v-card class="col-3 ma-4" style="max-width: 300px;">
-        <v-layout justify-center>
-        <DashboardDatePicker />
-        </v-layout>
-      </v-card>
-      </v-flex>
-      </v-layout>
+      <v-row align-center>
+        <v-flex lg9>
+          <v-card class="ma-5 pa-3" style="">
+            <div>
+              일기 쓴 횟수
+            </div>
+            <DiaryChart />
+          </v-card>
+        </v-flex>
+        <v-flex lg3>
+          <v-card class="col-3 ma-4" style="max-width:300px">
+            <DashboardDatePicker />
+          </v-card>
+        </v-flex>
+      </v-row>
     </v-row>
     <v-divider></v-divider>
   </div>
@@ -38,7 +31,7 @@
 
 <script>
   import RetireCalculator from '../components/RetireCalculator'
-  import Chart from '../components/Chart'
+  import DiaryChart from '../components/DiaryChart'
   import DashboardDatePicker from '../components/DashboardDatePicker'
 
   export default {
@@ -56,7 +49,7 @@
 
     components: {
       RetireCalculator,
-      Chart,
+      DiaryChart,
       DashboardDatePicker,
     },
   }
