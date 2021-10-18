@@ -26,7 +26,7 @@ class PostShowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'nickname', 'title', 'content', 'image', 'is_notice', 'write_date']
+        fields = ['id', 'prev_id', 'next_id', 'nickname', 'title', 'content', 'image', 'is_notice', 'write_date']
 
 class PostListSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
