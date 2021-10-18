@@ -505,6 +505,7 @@ export default {
     if(!this.isLogin){
       this.$alert("로그인이 필요한 페이지입니다.","","warning");
       this.$router.push('/');
+      return;
     } 
     this.node = 99;
     this.callVCInfo();

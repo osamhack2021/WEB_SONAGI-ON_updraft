@@ -75,6 +75,11 @@ export default {
         this.updateChart();
       }
     },
+    access_token: function() {
+      if(this.isLogin){
+        this.updateChart();
+      }
+    }
   },
 }
 </script>
