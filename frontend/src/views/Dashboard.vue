@@ -10,7 +10,7 @@
     <RetireCalculator />
     </v-card>
     <v-divider></v-divider>
-    <v-row class="pa-4" style="width: 1300px;">
+    <v-row class="pa-4" style="width: 1100px;">
       <v-row align-center>
         <v-flex shrink>
           <v-card class="ma-4 pa-3" style="width: 700px; max-width:700px; height: 330px;">
