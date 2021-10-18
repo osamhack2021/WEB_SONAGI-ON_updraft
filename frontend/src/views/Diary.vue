@@ -5,6 +5,10 @@
       <v-breadcrumbs :items="bcLink"></v-breadcrumbs>
     </v-card>
     <v-layout>
+      <v-flex xs2 sm2 md2 lg2 xl2>
+      <v-card>
+      </v-card>
+      </v-flex>
     <Timeline
       v-if="isLoaded"
       :diaryData="diaryData"

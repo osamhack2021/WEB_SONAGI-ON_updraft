@@ -9,6 +9,7 @@ export default {
       default: null
     },
     options: {
+      responsive: false,
       type: Object,
       default: null
     }

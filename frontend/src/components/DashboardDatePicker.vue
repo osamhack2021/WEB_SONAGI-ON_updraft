@@ -1,15 +1,23 @@
 <template>
-  <v-date-picker
-    locale="ko-kr"
-    v-model="date2"
-    :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
-    :events="functionEvents"
-    show-adjacent-months
-    no-title
-  ></v-date-picker>
+  <div>
+    <v-skeleton-loader
+        v-if="!isLogin"
+        type="image"
+      > </v-skeleton-loader>
+    <v-date-picker
+      v-else
+      locale="ko-kr"
+      v-model="date2"
+      :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
+      :events="functionEvents"
+      show-adjacent-months
+      no-title
+    ></v-date-picker>
+  </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
   export default {
     name: 'Chart',
 
@@ -27,7 +35,9 @@
         return d.toISOString().substr(0, 10)
       })
     },
-
+    computed: {
+        ...mapState(['isLogin', 'userdata']),
+      },
     methods: {
       functionEvents (date) {
         const [,, day] = date.split('-')

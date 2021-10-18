@@ -5,7 +5,7 @@
       type="image"
     > </v-skeleton-loader>
     <LineChart
-      :height="100"
+      :height="150"
       v-else-if="isLoaded"
       :chartdata="chartdata"
       :options="options">

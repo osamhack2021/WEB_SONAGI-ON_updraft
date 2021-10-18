@@ -1,10 +1,11 @@
 <template>
     <div>
-    <v-card class="group pa-2">
+    <v-card class="group pa-2 mb-4">
       <v-icon small style="margin-left:5px">home</v-icon>
       <v-breadcrumbs :items="bcLink"></v-breadcrumbs>
     </v-card>
-    <v-card class="pa-8 elevation-0">
+    <v-layout justify-center>
+    <v-card class="ma-4 elevation-0" style="width: 900px;">
     <template>
       <v-row class="fill-height">
         <v-col>
@@ -139,6 +140,7 @@
       </v-row>
     </template>
     </v-card>
+    </v-layout>
     </div>
 </template>
 

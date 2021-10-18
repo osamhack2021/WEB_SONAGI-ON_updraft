@@ -16,12 +16,12 @@
               <v-card
                 :color="active ? 'primary' : 'grey lighten-1'"
                 class="ma-4"
-                height="90"
-                width="250"
+                height="80"
+                width="220"
                 @click="toggle"
               >
                 <v-img
-                  height="90"
+                  height="80"
                   :src=item.img
                 ></v-img>
                 <v-row

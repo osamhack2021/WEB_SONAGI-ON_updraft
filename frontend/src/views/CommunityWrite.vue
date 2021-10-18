@@ -5,7 +5,7 @@
       <v-breadcrumbs :items="bcLink"></v-breadcrumbs>
     </v-card>
     <v-layout align-center column fill-height class="py-8 px-4">
-      <v-card class="py-8 px-4 ma-4" style="max-width: 900px; min-width: 900px; height: 700px">
+      <v-card class="py-8 px-4 ma-4" style="width: 900px; height: 700px">
         <v-form lazy-validation>
           <v-text-field
             v-model="title"

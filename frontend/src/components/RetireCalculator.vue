@@ -1,5 +1,5 @@
 <template>
-  <v-card class="elevation-0">
+  <v-card class="elevation-0" style="width: 1043px;">
   <v-toolbar class="elevation-2">
   <template>
     <v-toolbar-title v-if="!isLogin">D-??</v-toolbar-title>

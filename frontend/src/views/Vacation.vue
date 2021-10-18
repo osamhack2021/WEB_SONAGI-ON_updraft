@@ -1,12 +1,14 @@
 <template>
-    <v-card>
+  <v-layout justify-center>
+    <v-card style="width: 900px;">
        <v-container fluid>
        <v-toolbar>
             <v-toolbar-title >휴가 관리</v-toolbar-title>
        </v-toolbar>
         <div class="mt-3">
             <v-row>
-                <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
+                <v-spacer></v-spacer>
+                <v-col lg="3" md="3" sm="3" xs="12" class="pb-2">
                     <v-card>
                         <v-row class="no-gutters text-center">
                             <div class="col-auto">
@@ -20,7 +22,7 @@
                     </v-card>
                 </v-col>
                 <v-spacer></v-spacer>
-                <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
+                <v-col lg="3" md="3" sm="3" xs="12" class="pb-2">
                     <v-card>
                         <v-row class="no-gutters text-center">
                             <div class="col-auto">
@@ -34,7 +36,7 @@
                     </v-card>
                 </v-col>
                 <v-spacer></v-spacer>
-                <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
+                <v-col lg="3" md="3" sm="3" xs="12" class="pb-2">
                     <v-card>
                         <v-row class="no-gutters text-center">
                             <div class="col-auto">
@@ -352,7 +354,7 @@
         </v-dialog>
         </div>
     </v-card>
-
+  </v-layout>
 </template>
 <script>
 import {mapState} from 'vuex'

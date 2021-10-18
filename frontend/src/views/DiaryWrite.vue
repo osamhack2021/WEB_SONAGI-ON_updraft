@@ -5,7 +5,7 @@
       <v-breadcrumbs :items="bcLink"></v-breadcrumbs>
     </v-card>
     <v-layout align-center column fill-height class="py-8 px-4">
-      <v-card class="py-8 px-4 ma-4" style="max-width: 900px; width: 900px; height: 700px">
+      <v-card class="py-8 px-4 ma-4" style="width: 900px; height: 700px">
         <v-card-title class="justify-center">
           오늘 나의 감정
         </v-card-title>

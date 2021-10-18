@@ -16,8 +16,8 @@
               <v-card
                 :color="active ? 'primary' : 'grey lighten-1'"
                 class="ma-4"
-                height="420"
-                width="300"
+                height="380"
+                width="280"
                 @click="toggle"
               >
                 <v-img

@@ -1,8 +1,9 @@
 <template>
             <v-sheet
-              max-width="700"
+              width="600"
             >
               <v-slide-group
+                size="700"
                 mandantory
                 show-arrows
                 v-model="model"
