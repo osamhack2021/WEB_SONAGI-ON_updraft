@@ -69,8 +69,8 @@
         <template>
             <v-list-item  v-for="(vc,i) in filterVmp" :key="i">
                 <v-list-item-content>
-                    <v-conatiner>
-                        <v-row :class="vc.usedS.idx==vc.termS.idx ? grey : white">
+                    <v-container>
+                        <v-row :class="vc.usedS.idx==vc.termS.idx ? 'grey' : 'white'">
                         <v-col>
                             <h2>{{vc.name}}</h2><h4>{{vType[vc.type]}} 휴가/{{vc.day}} 받음</h4>
                         </v-col>
@@ -86,7 +86,7 @@
                             >
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn
-                                color="grey"
+                                :color="vc.usedS.idx==vc.termS.idx ? 'white' : 'grey'"
                                 dark
                                 v-bind="attrs"
                                 v-on="on"
@@ -227,7 +227,7 @@
                             </v-dialog>
                         </v-col>
                         </v-row>              
-                    </v-conatiner>    
+                    </v-container>    
                 </v-list-item-content>
             </v-list-item>
         </template>
@@ -357,140 +357,158 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-    components: {
+  components: {
 
   },
   data() {
-      return {
-        nameRules: [
+    return {
+      nameRules: [
         v => !!v || 'Name is required',
-        ],
-        vcDay_rule :[
-             v => !!v || 'Day is required',
-            v=> /^[0-9-]*$/.test(v) || '형식에 맞춰서 입력해주세요'
-        ],
-        vType : [
-            "포상","보상","위로","청원","정기","외박","기타"
-        ],
-        vmp : [],
-        filterVmp:[],
-        termList :[],
-        newV :{
-            name : "",
-            type: 0,
-            day : "",
-            dialog: false,
-            dialogs:false,
-            termS : {tag:"",idx:0},
-            usedS : {tag:"",idx:0}
-        }
-      }
+      ],
+      vcDay_rule :[
+        v => !!v || 'Day is required',
+        v=> /^[0-9-]*$/.test(v) || '형식에 맞춰서 입력해주세요'
+      ],
+      vType : [
+        "포상","보상","위로","청원","정기","외박","기타"
+      ],
+      vmp : [],
+      filterVmp:[],
+      termList :[],
+      newV :{
+        name : "",
+        type: 0,
+        day : "",
+        dialog: false,
+        dialogs:false,
+        termS : {tag:"",idx:0},
+        usedS : {tag:"",idx:0}
+      },
+      node: null,
+    }
   },
   methods :{
-      resetDefault() {
-          this.callVCInfo();
-      },
-      changeInfo(idx) {      
-        const config = {
+    resetDefault() {
+      this.callVCInfo();
+    },
+    changeInfo(idx) {      
+      const config = {
         headers: {
           Authorization: `Bearer ${this.access_token}`,
         },
-        };
-        this.axios.patch(`${this.$store.state.BACKEND_URL}/api/vacation/VCInfo/${idx}`,this.vmp[idx],config)
-            .then(()=>{
-                alert("수정완료!");
+      };
+      let target = this.filterVmp[idx];
+      target = {"id":target.id, "name":target.name, "day":target.day, "type":target.type, "usedS": target.usedS.idx, "termS": target.termS.idx};
+      this.axios.post(`${this.$store.state.BACKEND_URL}/api/vacation/rewrite`,target, config)
+        .then(()=>{
+          this.$alert("성공적으로 수정했습니다.","","success");
+          this.resetDefault();
         });
-
-        this.resetDefault();
-      },
-      makeTerm() {
-          this.termList.push({tag:"미사용", idx:0})
-          for(var i = 1;i<=50;i++){
-              this.termList.push({tag:(i-1)+"박 "+i+"일",idx:i});
+    },
+    makeTerm() {
+      this.termList.push({tag:"미사용", idx:0})
+      for(var i = 1;i<=50;i++){
+          this.termList.push({tag:(i-1)+"박 "+i+"일",idx:i});
+      }
+    },
+    deleteV(idx){
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.access_token}`,
+        },
+      };
+      let id = this.filterVmp[idx].id;
+      this.axios.post(`${this.$store.state.BACKEND_URL}/api/vacation/delete`, {id}, config)
+        .then(()=>{
+          this.$alert("성공적으로 삭제했습니다.","","success");
+          this.resetDefault();
+        });
+    },
+    addVacation() {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.access_token}`,
+        },
+      };
+      this.newV.termS = this.newV.termS.idx;
+      this.newV.usedS = this.newV.usedS.idx;
+      this.axios.post(`${this.$store.state.BACKEND_URL}/api/vacation/write`,this.newV,config)
+        .then(()=>{
+          this.$alert("성공적으로 추가되었습니다.","","success");
+          this.resetDefault();
+        })
+        .catch(()=>{
+          this.$alert("실패했습니다.","","error");
+        });
+      this.newV.dialog = false;
+    },
+    closeD(){
+      this.newV.dialog = false;
+      this.resetAdd();
+    },
+    resetAdd() {
+      this.newV.name = "";
+      this.newV.type = 0;
+      this.newV.day = "";
+      this.newV.termS = {tag:"",idx:0};
+      this.newV.usedS = {tag:"",idx:0};
+    },
+    all() {
+      var count = 0;
+      for(var i =0;i<this.vmp.length;i++){
+          count += this.vmp[i].termS.idx;
+      }
+      return count;
+    },
+    use() {
+      var count = 0;
+      for(var i =0;i<this.vmp.length;i++){
+          count += this.vmp[i].usedS.idx;
+      }
+      return count;
+    },
+    left() {
+      return this.all()-this.use();
+    },
+    callVCInfo() {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.access_token}`,
+        }
+      };
+      this.axios.get(`${this.$store.state.BACKEND_URL}/api/vacation/list`, config)
+        .then((res)=>{
+          this.vmp = res.data;
+          for(let i = 0; i < this.vmp.length; i++){
+            let tmp = this.vmp[i].termS;
+            this.vmp[i].termS = {"tag":(tmp-1)+"박"+tmp+"일", "idx":tmp};
+            tmp = this.vmp[i].usedS;
+            this.vmp[i].usedS = {"tag":(tmp-1)+"박"+tmp+"일", "idx":tmp};
           }
-      },
-      deleteV(idx){
-        const config = {
-        headers: {
-          Authorization: `Bearer ${this.access_token}`,
-        },
-        };
-        this.axios.delete(`${this.$store.state.BACKEND_URL}/api/vacation/VCInfo/${idx}`,config)
-            .then(()=>{
-                alert("삭제완료!");
+          this.filterList(this.node);
+        }).catch(()=>{
+          this.$alert("예상치 못한 에러가 발생했습니다. 고객센터로 문의해 주세요.","","error");
         });
-
-          this.resetDefault();
-      },
-      addVacation() {
-        const config = {
-        headers: {
-          Authorization: `Bearer ${this.access_token}`,
-        },
-        };
-        this.axios.post(`${this.$store.state.BACKEND_URL}/api/vacation/VCInfo`,this.newV,config)
-            .then(()=>{
-                alert("추가완료!");
-        });
-          this.newV.dialog = false;
-          this.resetDefault();
-      },
-      closeD(){
-        this.newV.dialog = false;
-        console.log(this.newV.dialog);
-        this.resetAdd();
-      },
-      resetAdd() {
-          this.newV.name = "";
-          this.newV.type = 0;
-          this.newV.day = "";
-          this.newV.termS = {tag:"",idx:0};
-          this.newV.usedS = {Tag:"",idx:0};
-      },
-      all() {
-        var count = 0;
-        for(var i =0;i<this.vmp.length;i++){
-            count += this.vmp[i].termS.idx;
-        }
-        return count;
-      },
-      use() {
-        var count = 0;
-        for(var i =0;i<this.vmp.length;i++){
-            count += this.vmp[i].usedS.idx;
-        }
-        return count;
-      },
-      left() {
-        return this.all()-this.use();
-      },
-      callVCInfo() {
-        const config = {
-        headers: {
-          Authorization: `Bearer ${this.access_token}`,
-        }
-        };
-        this.axios.get(`${this.$store.state.BACKEND_URL}/api/vacation/VCInfo`, config)
-            .then((res)=>{
-                 this.vmp = res;   
-            }).catch(()=>{
-                alert("불러오기 실패")
-            });
-        },
-        filterList(node) {
-            if(node==99)  this.filterVmp = this.vmp;
-            else this.filterVmp =  this.vmp.filter((item)=>{
-                return item.type == node;
-            })
-        }
+    },
+    filterList(node) {
+      if(node==99)  this.filterVmp = this.vmp;
+      else this.filterVmp =  this.vmp.filter((item)=>{
+        return item.type == node;
+      })
+      this.node = node;
+    }
   },
   computed :{
-      ...mapState(['v'])
+    ...mapState(['isLogin', 'access_token'])
   },
   mounted() {
-      this.callVCInfo();
-      this.makeTerm();
-      this.filterVmp = this.vmp;
+    if(!this.isLogin){
+      this.$alert("로그인이 필요한 페이지입니다.","","warning");
+      this.$router.push('/');
+    } 
+    this.node = 99;
+    this.callVCInfo();
+    this.makeTerm();
   }
 }
 </script>
