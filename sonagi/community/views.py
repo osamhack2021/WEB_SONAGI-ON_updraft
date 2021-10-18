@@ -28,7 +28,7 @@ class BoardListView(APIView):
 class PostShowView(APIView):
     permission_classes = [rest_framework.permissions.AllowAny]
     def post(self, request):
-        posts = Post.objects.filter(id=request.data['id'])
+        posts = Post.objects.get(id=request.data['id'])
         serializer = PostListSerializer(posts)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -93,7 +93,7 @@ class CommentListView(APIView):
     permission_classes = [rest_framework.permissions.AllowAny]
     def post(self, request):
         paginator = CommentPageNumberPagination()
-        posts = Comment.objects.filter(post_id=request.data['post_id'])
+        posts = Comment.objects.filter(post_id=request.data['post_id'], many=True)
         result_page = paginator.paginate_queryset(posts, request)
         serializer = CommentListSerializer(result_page, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
