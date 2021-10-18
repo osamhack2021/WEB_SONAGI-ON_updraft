@@ -12,16 +12,16 @@ class PostShowSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
     image = serializers.ImageField(use_url=True)
     nickname = serializers.SerializerMethodField()
-    previd = serializers.SerializerMethodField()
-    nextid = serializers.SerializerMethodField()
+    prev_id = serializers.SerializerMethodField()
+    next_id = serializers.SerializerMethodField()
 
     def get_nickname(self, obj):
         return obj.email.setting.get(email=obj.email.email).nickname
 
-    def get_previd(self, obj):
+    def get_prev_id(self, obj):
         return Post.objects.filter(board_id=obj.board_id, id__lt=obj.id)[-1].id
     
-    def get_nextid(self, obj):
+    def get_next_id(self, obj):
         return Post.objects.filter(board_id=obj.board_id, id__gt=obj.id)[0].id
 
     class Meta:
