@@ -19,10 +19,18 @@ class PostShowSerializer(serializers.ModelSerializer):
         return obj.email.setting.get(email=obj.email.email).nickname
 
     def get_prev_id(self, obj):
-        return Post.objects.filter(board_id=obj.board_id, id__lt=obj.id)[-1].id
+        tmp = Post.objects.filter(board_id=obj.board_id, id__lt=obj.id)
+        if len(tmp) > 0:
+            return tmp[len(tmp)-1].id
+        else:
+            return
     
     def get_next_id(self, obj):
-        return Post.objects.filter(board_id=obj.board_id, id__gt=obj.id)[0].id
+        tmp = Post.objects.filter(board_id=obj.board_id, id__gt=obj.id)
+        if len(tmp) > 0:
+            return tmp[0].id
+        else:
+            return
 
     class Meta:
         model = Post
