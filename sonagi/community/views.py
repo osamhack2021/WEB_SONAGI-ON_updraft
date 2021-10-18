@@ -93,9 +93,8 @@ class CommentListView(APIView):
     permission_classes = [rest_framework.permissions.AllowAny]
     def post(self, request):
         paginator = CommentPageNumberPagination()
-        posts = Comment.objects.filter(post_id=request.data['post_id'], many=True)
-        result_page = paginator.paginate_queryset(posts, request)
-        serializer = CommentListSerializer(result_page, many=True)
+        posts = Comment.objects.filter(post_id=request.data['post_id'])
+        serializer = CommentListSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class CommentWriteView(APIView):
