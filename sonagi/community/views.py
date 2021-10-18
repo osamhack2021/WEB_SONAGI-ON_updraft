@@ -37,8 +37,7 @@ class PostListView(APIView):
     def post(self, request):
         paginator = PostPageNumberPagination()
         posts = Post.objects.filter(board_id=request.data['board_id'])
-        result_page = paginator.paginate_queryset(posts, request)
-        serializer = PostListSerializer(result_page, many=True)
+        serializer = PostListSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class PostWriteView(APIView):
