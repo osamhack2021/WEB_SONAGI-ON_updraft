@@ -6,9 +6,11 @@ import DiaryWrite from '@/views/DiaryWrite'
 import Calendar from '@/views/Calendar'
 import Community from '@/views/Community'
 import CommunityWrite from '@/views/CommunityWrite'
+import Post from '@/views/Post'
 import Event from '@/views/Event'
 import SelfCare from '@/views/SelfCare'
 import Vacation from '@/views/Vacation'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,6 +43,11 @@ const routes = [
         path: '/community-write',
         name: '커뮤니티',
         component: CommunityWrite
+    },
+    {
+        path: '/post',
+        name: '커뮤니티',
+        component: Post
     },
     {
         path: '/event',
