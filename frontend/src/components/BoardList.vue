@@ -16,6 +16,8 @@
             :headers="headers"
             :items="bdList"
             :search="search"
+            :sort-by="['no']"
+            :sort-desc="[true]"
           ></v-data-table>
           <v-row justify="center" class="pa-4">
             <v-btn link to="/community-write">

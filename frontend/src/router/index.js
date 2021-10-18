@@ -41,12 +41,12 @@ const routes = [
     },
     {
         path: '/community-write',
-        name: '커뮤니티',
+        name: '커뮤니티 ',
         component: CommunityWrite
     },
     {
         path: '/post',
-        name: '커뮤니티',
+        name: '커뮤니티  ',
         component: Post
     },
     {
