@@ -1,5 +1,5 @@
 from .models import Board, Post, Comment
-from .serializers import BoardListSerializer, PostListSerializer, PostWriteSerializer, PostRewriteSerializer, CommentListSerializer, CommentWriteSerializer, CommentRewriteSerializer
+from .serializers import BoardListSerializer, PostShowSerializer, PostListSerializer, PostWriteSerializer, PostRewriteSerializer, CommentListSerializer, CommentWriteSerializer, CommentRewriteSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -29,7 +29,7 @@ class PostShowView(APIView):
     permission_classes = [rest_framework.permissions.AllowAny]
     def post(self, request):
         posts = Post.objects.get(id=request.data['id'])
-        serializer = PostListSerializer(posts)
+        serializer = PostShowSerializer(posts)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class PostListView(APIView):
