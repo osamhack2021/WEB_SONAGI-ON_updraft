@@ -7,6 +7,7 @@
           </template>
           <template v-else>
             <v-avatar size="150">
+              <!-- todo: v-badge로 계급 사진 넣기 -->
               <img
                 :src="$store.state.BACKEND_URL+'/'+user.profile"
                 alt="에러"

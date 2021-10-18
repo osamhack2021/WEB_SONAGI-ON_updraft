@@ -4,7 +4,7 @@
       <v-icon small style="margin-left:5px">home</v-icon>
       <v-breadcrumbs :items="bcLink"></v-breadcrumbs>
     </v-card>
-    <v-card class="pa-8">
+    <v-card class="pa-8 elevation-0">
     <template>
       <v-row class="fill-height">
         <v-col>

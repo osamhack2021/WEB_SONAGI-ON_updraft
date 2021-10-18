@@ -19,8 +19,8 @@
   </v-toolbar>
     
   <v-divider></v-divider>
-    <v-container fluid class="pt-5">
-        <div>
+    <v-container fluid class="pa-0 ma-0">
+        <v-card class="pa-4">
             <v-row>
                 <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
                     <v-skeleton-loader
@@ -134,7 +134,7 @@
                     </v-card>
                 </v-col>
             </v-row>
-        </div>
+        </v-card>
     </v-container>
     </v-card>
 </template>
