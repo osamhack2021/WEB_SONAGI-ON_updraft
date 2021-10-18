@@ -68,12 +68,6 @@
             </v-list-item-icon>
             <v-list-item-title>공모전/행사</v-list-item-title>
          </v-list-item>
-         <v-list-item link to="self-care">
-            <v-list-item-icon>
-               <v-icon>mdi-dumbbell</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>자기관리</v-list-item-title>
-         </v-list-item>
          <v-list-item link to="vacation">
             <v-list-item-icon>
                <v-icon>mdi-airplane-settings</v-icon>
