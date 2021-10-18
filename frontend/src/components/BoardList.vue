@@ -16,11 +16,11 @@
             :headers="headers"
             :items="bdList"
             :search="search"
-            :sort-by="['no']"
+            :sort-by="['id']"
             :sort-desc="[true]"
           ></v-data-table>
           <v-row justify="center" class="pa-4">
-            <v-btn link to="/community-write">
+            <v-btn link :to="'/community-write?board_id='+this.board_id">
               글쓰기
             </v-btn>
           </v-row>
@@ -32,7 +32,7 @@
 import {mapState} from 'vuex'
 
 export default {
-  props: ['boardid'],
+  props: ['board_id'],
   name: 'BoardList',
   computed: {
     ...mapState(['isLogin', 'access_token']),
@@ -44,7 +44,7 @@ export default {
         text: 'No',
         align: 'center',
         sortable: true,
-        value: 'no',
+        value: 'id',
         width: 30,
       },
       { 
@@ -57,40 +57,47 @@ export default {
         text: '작성자', 
         align: 'center',
         sortable: false,
-        value: 'name',
+        value: 'nickname',
         width: 130,
       },
       { 
-        text: '날짜', 
+        text: '작성일자', 
         align: 'center',
         sortable: false,
-        value: 'date', 
-        width: 60,
+        value: 'write_date', 
+        width: 120,
       },
     ],
     bdList: [
-      {
-        no: "1",
-        title: "[공지]게시판 이용 가이드",
-        name: '관리자',
-        date: '2021/09/22'
-      },
-      {
-        no: "2",
-        title: "아 전역 언제하냐",
-        name: '상병 정재훈',
-        date: '2021/09/24'
-      },
     ],
   }),
-  mehotds: {
-    
+  methods: {
+    updateBoard: function(){
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.access_token}`,
+        },
+      };
+      this.axios
+      .post(`${this.$store.state.BACKEND_URL}/api/community/post/list`, {'board_id':this.board_id}, config)
+      .then((res) => {
+        this.bdList = res.data;
+        for (let i = 0; i < this.bdList.length; i++){
+          this.bdList[i].write_date = this.bdList[i].write_date.split('T')[0];
+        }
+      })
+      .catch(() => {
+        this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
+      });
+    }
   },
   created() {
     if(!this.isLogin){
       this.$alert("로그인이 필요한 페이지입니다.", "", "warning");
       this.$router.push("/");
       return;
+    } else{
+      this.updateBoard();
     }
   },
 }

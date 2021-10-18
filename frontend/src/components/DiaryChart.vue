@@ -71,7 +71,6 @@ export default {
           }
           this.chartdata.labels[0] = "입대";
           this.chartdata.labels[this.chartdata.labels.length-1] = "전역";
-          console.log(this.chartdata.labels);
           this.chartdata.datasets[0].data= value;
           this.isLoaded = true;
         })
