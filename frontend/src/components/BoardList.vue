@@ -18,7 +18,13 @@
             :search="search"
             :sort-by="['id']"
             :sort-desc="[true]"
-          ></v-data-table>
+          > 
+          <template #item.title="{ item }">
+            <router-link :to="{ name: '커뮤니티 게시글', query: { board_id: board_id, post_id: item.id } }">
+              {{ item.title }}
+            </router-link>
+          </template>
+          </v-data-table>
           <v-row justify="center" class="pa-4">
             <v-btn link :to="'/community-write?board_id='+this.board_id">
               글쓰기

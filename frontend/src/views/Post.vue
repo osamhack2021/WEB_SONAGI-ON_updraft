@@ -72,9 +72,9 @@
                         </v-card>
                     </v-col>
                     <v-col class="my-2">
-                        [공지]게시판 이용 가이드
+                        {{prevpostData.title}}
                     </v-col>
-                    <v-col class="ma-2" align="right">2021/09/22</v-col>
+                    <v-col class="ma-2" align="right">{{prevpostData.write_date}}</v-col>
                 </v-row><v-divider></v-divider>
                 <v-row>
                     <v-col class="col-2">
@@ -83,9 +83,9 @@
                         </v-card>
                     </v-col>
                     <v-col class="my-2">
-                        test3
+                        {{nextpostData.title}}
                     </v-col>
-                    <v-col class="ma-2" align="right">2021/09/26</v-col>
+                    <v-col class="ma-2" align="right">{{nextpostData.write_date}}</v-col>
                 </v-row>
                 <v-divider></v-divider>
             </v-card>
@@ -115,10 +115,10 @@ export default {
     board_id: null,
     post_id: null,
     postData:{
-      title: "언제 전역 하냐",
-      nickname: "정재훈",
-      write_date: "2021-09-23 23:07:51",
-      contents: "ㅈㄱㄴ\n 아 빨리 전역하고 싶다.",
+      title: "",
+      nickname: "",
+      write_date: "",
+      contents: "",
     },
     prevpostData:{
       title: "",
@@ -130,16 +130,10 @@ export default {
     },
     comments: [
       {
-        class: "일병",
-        nickname: "국현호",
-        write_date: "2021-09-23 23:09:35",
-        contents: "저는 휴가라도 빨리 나가고 싶습니다...",
-      },
-      {
-        class: "일병",
-        nickname: "정우성",
-        write_date: "2021-09-23 23:10:47",
-        contents: "휴가 개꿀 ㅎ",
+        class: "",
+        nickname: "",
+        write_date: "",
+        contents: "",
       },
     ],
   }),
@@ -147,7 +141,7 @@ export default {
     ...mapState(['isLogin', 'access_token']),
   },
   methods: {
-    upwrite_datePost: function() {
+    updatePost: function() {
       const config = {
         headers: {
           Authorization: `Bearer ${this.access_token}`,
@@ -157,12 +151,69 @@ export default {
         .post(`${this.$store.state.BACKEND_URL}/api/community/post/show`, {'id':this.post_id}, config)
         .then((res) => {
           this.postData = res.data;
-          this.postData.write_date = new Date(this.postData.write_date)
+          let tmp = this.postData.write_date;
+          tmp = tmp.split(".")[0];
+          this.postData.write_date = tmp.split("T")[0] + " " + tmp.split("T")[1];
+          if(this.postData.prev_id !== null){
+            this.updatePrev(this.postData.prev_id);
+          }
+          if(this.postData.next_id !== null){
+            this.updateNext(this.postData.next_id);
+          }
         })
         .catch(() => {
           this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
         });
-    }
+    },
+    updateComment: function() {
+      const config = {
+          headers: {
+            Authorization: `Bearer ${this.access_token}`,
+        },
+      };
+      this.axios
+        .post(`${this.$store.state.BACKEND_URL}/api/community/comment/list`, {'post_id':this.post_id}, config)
+        .then((res) => {
+          this.comments = res.data;
+        })
+        .catch(() => {
+          this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
+        });
+    },
+    updatePrev: function(id){
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.access_token}`,
+        },
+      };
+      this.axios
+        .post(`${this.$store.state.BACKEND_URL}/api/community/post/show`, {'id':id}, config)
+        .then((res) => {
+          this.prevpostData = res.data;
+          let tmp = this.prevpostData.write_date;
+          this.prevpostData.write_date = tmp.split("T")[0];
+        })
+        .catch(() => {
+          this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
+        });
+    },
+    updateNext: function(id){
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.access_token}`,
+        },
+      };
+      this.axios
+        .post(`${this.$store.state.BACKEND_URL}/api/community/post/show`, {'id':id}, config)
+        .then((res) => {
+          this.nextpostData = res.data;
+          let tmp = this.nextpostData.write_date;
+          this.nextpostData.write_date = tmp.split("T")[0];
+        })
+        .catch(() => {
+          this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
+        });
+    },
   },
   created() {
     if(!this.isLogin){
@@ -172,7 +223,8 @@ export default {
     } else{
       this.board_id = this.$route.query.board_id;
       this.post_id = this.$route.query.post_id;
-      this.upwrite_datePost();
+      this.updatePost();
+      this.updateComment();
     }
   }
 }
