@@ -60,6 +60,8 @@
 import Category from './components/Category.vue';
 import Profile from './components/Profile.vue';
 
+document.title = "소중한 나의 병영일기 Online | Sonagi-On";
+
 export default {
   name: 'App',
   components: {
