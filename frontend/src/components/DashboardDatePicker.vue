@@ -46,6 +46,10 @@ import { mapState } from 'vuex';
         if ([1, 19, 22].includes(parseInt(day, 10))) return ['red', '#00f']
         return false
       },
+      dayFormat(day) {
+			const arr = day.split('-');
+			return Number(arr[arr.length-1]);
+		}
     },
   }
 </script>
