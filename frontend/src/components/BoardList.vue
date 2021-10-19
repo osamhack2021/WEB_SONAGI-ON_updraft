@@ -20,7 +20,9 @@
             :sort-desc="[true]"
           > 
           <template #item.title="{ item }">
-            <router-link :to="{ name: '커뮤니티 게시글', query: { board_id: board_id, post_id: item.id } }">
+            <router-link :to="{ name: '커뮤니티 게시글', query: { board_id: board_id, post_id: item.id } }"
+              style="text-decoration: none; color: inherit;"
+            >
               {{ item.title }}
             </router-link>
           </template>

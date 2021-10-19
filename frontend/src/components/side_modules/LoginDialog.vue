@@ -16,7 +16,7 @@
       </template>
                   <v-card class="elevation-12">
                      <v-toolbar dark color="grey darken-2 white--text">
-                        <v-toolbar-title>Login</v-toolbar-title>
+                        <v-toolbar-title>로그인</v-toolbar-title>
                      </v-toolbar>
                      <v-card-text>
                         <v-form ref="loginform">

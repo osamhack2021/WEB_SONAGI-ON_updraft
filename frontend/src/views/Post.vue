@@ -72,7 +72,11 @@
                         </v-card>
                     </v-col>
                     <v-col class="my-2">
+                      <router-link :to="{ name: '커뮤니티 게시글', query: { board_id: board_id, post_id: prevpostData.id } }"
+                        style="text-decoration: none; color: inherit;"
+                      >
                         {{prevpostData.title}}
+                      </router-link>
                     </v-col>
                     <v-col class="ma-2" align="right">{{prevpostData.write_date}}</v-col>
                 </v-row><v-divider></v-divider>
@@ -83,7 +87,11 @@
                         </v-card>
                     </v-col>
                     <v-col class="my-2">
+                      <router-link :to="{ name: '커뮤니티 게시글', query: { board_id: board_id, post_id: nextpostData.id } }"
+                        style="text-decoration: none; color: inherit;"
+                      >
                         {{nextpostData.title}}
+                      </router-link>
                     </v-col>
                     <v-col class="ma-2" align="right">{{nextpostData.write_date}}</v-col>
                 </v-row>
@@ -121,10 +129,12 @@ export default {
       contents: "",
     },
     prevpostData:{
+      id: null,
       title: "",
       write_date: "",
     },
     nextpostData:{
+      id: null,
       title: "",
       write_date: "",
     },
@@ -226,7 +236,23 @@ export default {
       this.updatePost();
       this.updateComment();
     }
-  }
+  },
+  watch: {
+    $route: function(){
+        if(!this.isLogin){
+        this.$alert("로그인이 필요한 페이지입니다.", "", "warning");
+        this.$router.push("/");
+        return;
+      } else{
+        this.prevpostData = {};
+        this.nextpostData = {};
+        this.board_id = this.$route.query.board_id;
+        this.post_id = this.$route.query.post_id;
+        this.updatePost();
+        this.updateComment();
+      }
+    }
+  },
 }
 </script>
 

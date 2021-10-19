@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     updateChart: function(){
+      this.isLoaded = false;
       this.chartdata.labels = [];
       let value = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
       let enlisted_date = new Date(this.userdata.enlisted_date);
@@ -88,7 +89,7 @@ export default {
       }
     },
     access_token: function() {
-      if(this.isLogin){
+      if(this.isLogin && this.isLoaded){
         this.updateChart();
       }
     }
