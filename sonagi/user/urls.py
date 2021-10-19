@@ -1,5 +1,5 @@
 from django.urls import path
-#from .views import UserShowView, google_login_redirect, UserGoogleLoginView, UserGoogleCallbackView
+from .views import UserShowView #google_login_redirect, UserGoogleLoginView, UserGoogleCallbackView
 
 urlpatterns = [
     path("user", UserShowView.as_view(), name="current-user"),
