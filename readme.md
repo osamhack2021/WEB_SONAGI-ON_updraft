@@ -10,17 +10,17 @@
   * [🔍 기능 설명](#-기능-설명)
   * [🌞 기대 효과 및 전망](#-기대-효과-및-전망)
   * [💻 구성 요건](#-구성-요건)
-  * [📜 기술 스택 (Technique Used)](#----------technique-used-)
+  * [📜 기술 스택 (Technique Used)](#-기술-스택-technique-used)
     + [Back-End](#back-end)
     + [Front-End](#front-end)
-  * [💡 설치 안내 (Installation Process)](#----------installation-process-)
+  * [💡 설치 안내 (Installation Process)](#-설치-안내-installation-process)
     + [Back-End](#back-end-1)
     + [Front-End](#front-end-1)
-  * [📱 프로젝트 사용법 (Getting Started)](#-------------getting-started-)
+  * [📱 프로젝트 사용법 (Getting Started)](#-프로젝트-사용법-getting-started)
     + [Back-End](#back-end-2)
     + [Front-End](#front-end-2)
-  * [👯 팀 정보 (Team Information)](#---------team-information-)
-  * [🌱 저작권 및 사용권 정보 (Copyleft / End User License)](#-----------------copyleft---end-user-license-)
+  * [👯 팀 정보 (Team Information)](#-팀-정보-team-information)
+  * [🌱 저작권 및 사용권 정보 (Copyleft / End User License)](#-저작권-및-사용권-정보-copyleft--end-user-license)
 
 
 
