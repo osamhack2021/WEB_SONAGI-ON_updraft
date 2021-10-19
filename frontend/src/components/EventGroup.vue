@@ -1,8 +1,14 @@
 <template>
         <v-sheet
-          class="mx-auto"
+          class="mx-auto pa-3"
         >
+        <v-skeleton-loader
+          v-if="!isLogin"
+          type="image"
+          width="500"
+        > </v-skeleton-loader>
           <v-slide-group
+            v-else
             v-model="model"
             class="pa-4"
             center-active
@@ -83,7 +89,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
   export default {
+    computed: {
+        ...mapState(['isLogin', 'userdata']),
+      },
     data: () => ({
       model: null,
       contest:[

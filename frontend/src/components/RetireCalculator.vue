@@ -25,7 +25,7 @@
                 <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
                     <v-skeleton-loader
                       v-if="!isLogin"
-                      type="image"
+                      type="article"
                     > </v-skeleton-loader>
                     <v-card v-else>
                         <v-row class="no-gutters">
@@ -56,7 +56,7 @@
                 <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
                     <v-skeleton-loader
                       v-if="!isLogin"
-                      type="image"
+                      type="article"
                     > </v-skeleton-loader>
                     <v-card v-else>
                         <v-row class="no-gutters">
@@ -87,7 +87,7 @@
                 <v-col lg="3" md="3" sm="6" xs="12" class="pb-2">
                     <v-skeleton-loader
                       v-if="!isLogin"
-                      type="image"
+                      type="article"
                     > </v-skeleton-loader>
                     <v-card v-else>
                         <v-row class="no-gutters">
@@ -112,7 +112,7 @@
                 <v-col v-show="(!nmHouse)" lg="3" md="3" sm="6" xs="12" class="pb-2">
                     <v-skeleton-loader
                       v-if="!isLogin"
-                      type="image"
+                      type="article"
                     > </v-skeleton-loader>
                     <v-card v-else>
                         <v-row class="no-gutters">

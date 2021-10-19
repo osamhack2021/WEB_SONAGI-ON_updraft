@@ -2,7 +2,7 @@
   <div>
     <v-skeleton-loader
       v-if="!isLogin"
-      type="image"
+      type="list-item: text, card"
     > </v-skeleton-loader>
     <LineChart
       :height="150"

@@ -2,7 +2,8 @@
   <div>
     <v-skeleton-loader
         v-if="!isLogin"
-        type="image"
+        max-width=300
+        type="table: table-heading, table-thead, divider, card"
       > </v-skeleton-loader>
     <v-date-picker
       v-else
