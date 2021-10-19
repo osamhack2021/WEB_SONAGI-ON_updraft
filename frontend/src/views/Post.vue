@@ -37,6 +37,7 @@
                             solo
                             auto-grow
                             nickname="comments"
+                            v-model="comment.content"
                             label="댓글을 입력하세요."
                             background-color="grey lighten-3"
                             rows="4"
@@ -44,7 +45,7 @@
                         </v-row>
                         <v-row>
                             <v-col align="right">
-                                <v-btn>댓글 작성</v-btn>
+                                <v-btn @click="writeComment()">댓글 작성</v-btn>
                             </v-col>
                         </v-row>
                     </v-card>
@@ -55,11 +56,11 @@
                         <v-row>
                             <v-col class="ma-2 col-2 primary--text">{{v.class}} {{v.nickname}}</v-col>
                             <v-col class="ma-2 col-3 grey--text" align="left">
-                                {{v.write_date}}
+                                {{v.write_date.split('T')[0] + " " + v.write_date.split('T')[1].split(".")[0]}}
                             </v-col>
                         </v-row>
                         <v-row>
-                            <v-col class="ma-3">{{v.contents}}</v-col>
+                            <v-col class="ma-3">{{v.content}}</v-col>
                         </v-row>
                     </v-card>
                     <v-divider></v-divider>
@@ -126,7 +127,7 @@ export default {
       title: "",
       nickname: "",
       write_date: "",
-      contents: "",
+      content: "",
     },
     prevpostData:{
       id: null,
@@ -143,9 +144,12 @@ export default {
         class: "",
         nickname: "",
         write_date: "",
-        contents: "",
+        content: "",
       },
     ],
+    comment: {
+      content:"",
+    }
   }),
   computed: {
     ...mapState(['isLogin', 'access_token']),
@@ -219,6 +223,21 @@ export default {
           this.nextpostData = res.data;
           let tmp = this.nextpostData.write_date;
           this.nextpostData.write_date = tmp.split("T")[0];
+        })
+        .catch(() => {
+          this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
+        });
+    },
+    writeComment: function() {
+      const config = {
+          headers: {
+            Authorization: `Bearer ${this.access_token}`,
+        },
+      };
+      this.axios
+        .post(`${this.$store.state.BACKEND_URL}/api/community/comment/write`, {'post_id':this.post_id,"content":this.comment.content}, config)
+        .then(() => {
+          this.updateComment();
         })
         .catch(() => {
           this.$alert("세션이 만료되었습니다. 다시 로그인 해주세요.","","error");
