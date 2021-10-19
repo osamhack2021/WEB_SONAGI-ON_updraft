@@ -54,8 +54,8 @@
                 <div v-for="(v, k) in comments" :key="k">
                     <v-card tile class="elevation-0 ma-4" style="min-height: 100px;">
                         <v-row>
-                            <v-col class="ma-2 col-2 primary--text">{{v.class}} {{v.nickname}}</v-col>
-                            <v-col class="ma-2 col-3 grey--text" align="left">
+                            <v-col class="mt-2 col-1 primary--text">{{v.class}} {{v.nickname}}</v-col>
+                            <v-col class="mb-2 col-3 grey--text" align="left">
                                 {{v.write_date.split('T')[0] + " " + v.write_date.split('T')[1].split(".")[0]}}
                             </v-col>
                         </v-row>
