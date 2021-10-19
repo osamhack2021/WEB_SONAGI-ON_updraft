@@ -1,12 +1,13 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import User
 from django.contrib.auth import get_user_model
+from .utils import initialize_usersetting
 
 User = get_user_model()
 
 class UserDisplaySerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
+        model = User
         fields = ["email"]
 
 
@@ -23,8 +24,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(
             self.validated_data["email"], self.validated_data["password"]
         )
+        initialize_usersetting(self.validated_data["email"])
         return user
-    
     def validate(self, data):
         password1 = data.get('password')
         password2 = data.get('password2')

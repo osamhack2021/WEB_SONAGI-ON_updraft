@@ -1,5 +1,7 @@
 __pycache__/
 *.py[cod]
+media/
+migrations/
 
 sonagi/secret.json
 db.sqlite3

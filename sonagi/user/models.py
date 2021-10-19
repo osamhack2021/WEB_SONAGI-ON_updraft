@@ -26,7 +26,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user 
 
-class CustomUser(AbstractBaseUser,PermissionsMixin):    
+class User(AbstractBaseUser,PermissionsMixin):    
     objects = UserManager()
     
     email = models.EmailField(        
