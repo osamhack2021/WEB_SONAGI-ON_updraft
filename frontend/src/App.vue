@@ -13,8 +13,8 @@
       <!-- 상단 바 -->
       <v-app-bar app class="text-h4 bold" height="80px">
          <v-row>
-            <v-col class="appBarFont ma-5 pl-5">
-               <div>{{ $route.name }}</div>
+            <v-col class="myFont ma-5 pl-5">
+               <div><h3>{{ $route.name }}</h3></div>
             </v-col>
             <v-col align="right">
                <router-link to="/">
@@ -81,13 +81,9 @@ export default {
 
 <style>
    @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
-   @import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
 
    .myFont {
       font-family: 'Gowun Dodum', sans-serif;
-   }
-   .appBarFont {
-      font-family: 'Song Myung', serif;
    }
    .group {
    display: flex;

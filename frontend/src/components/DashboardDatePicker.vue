@@ -12,6 +12,7 @@
       :events="functionEvents"
       show-adjacent-months
       no-title
+      :day-format="dayFormat"
     ></v-date-picker>
   </div>
 </template>

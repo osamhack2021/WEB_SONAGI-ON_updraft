@@ -1,5 +1,5 @@
 <template>
-      <v-layout justify-center ma-4 pa-4>
+      <v-layout justify-center mb-4 pa-4>
         <v-card style="width: 900px;" class="elevation-4 pa-2 ma-2">
           <v-card-title>
             목록
