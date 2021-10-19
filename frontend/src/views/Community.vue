@@ -9,22 +9,22 @@
       <v-btn-toggle v-model="toggle_exclusive" mandantory>
       <v-row>
         <v-col class="col-3" align="center">
-          <v-btn width="200px">
+          <v-btn width="200px" @click="changeBoard(1)">
             <h2>자유 게시판</h2>
           </v-btn>
         </v-col>
         <v-col class="col-3" align="center">
-          <v-btn width="200px">
+          <v-btn width="200px" @click="changeBoard(2)">
             <h2>질문 게시판</h2>
           </v-btn>
         </v-col>
         <v-col class="col-3" align="center">
-          <v-btn width="200px">
+          <v-btn width="200px" @click="changeBoard(3)">
             <h2>정보 게시판</h2>
           </v-btn>
         </v-col>
         <v-col class="col-3" align="center">
-          <v-btn width="200px">
+          <v-btn width="200px" @click="changeBoard(4)">
             <h2>자랑 게시판</h2>
           </v-btn>
         </v-col>
@@ -32,19 +32,11 @@
       </v-btn-toggle>
     </v-card>
     </v-layout>
-    <BoardList :board_id="board_id"/>
+    <template v-if="isLoaded">
+      <BoardList :board_id="board_id" :key="board_id"/>
+    </template>
     </div>
 </template>
-
-<script>
-  export default {
-    data () {
-      return {
-        toggle_exclusive: undefined,
-      }
-    },
-  }
-</script>
 
 <script>
 import BoardList from '../components/BoardList'
@@ -66,8 +58,16 @@ export default {
         href: 'community',
       },
     ],
+    toggle_exclusive: undefined,
     board_id: 1,
+    isLoaded: true,
   }),
+  methods: {
+    changeBoard: function(id){
+      this.board_id = id;
+      this.$forceUpdate();
+    }
+  },
   created(){
     if(this.$route.query.board_id !== undefined){
       this.board_id = this.$route.query.board_id;
