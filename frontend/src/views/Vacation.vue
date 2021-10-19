@@ -111,7 +111,7 @@
                                     <v-row>
                                         <v-col cols="auto" align-self="center">휴가 이름 :</v-col>
                                         <v-col><v-text-field
-                                        v-model="vmp[i].name"
+                                        v-model="filterVmp[i].name"
                                         :rules="nameRules"    
                                         required                                                                        
                                     ></v-text-field></v-col>
@@ -119,7 +119,7 @@
                                     <v-row>
                                         <v-col cols="auto" align-self="center">휴가 타입 :</v-col>
                                         <v-col>
-                                        <v-radio-group v-model="vmp[i].type" row>
+                                        <v-radio-group v-model="filterVmp[i].type" row>
                                         <v-radio
                                             v-for="(n,idx) in vType"
                                             :key="idx"
@@ -132,7 +132,7 @@
                                         <v-col cols="auto" align-self="center">받은 날짜 :</v-col>
                                         <v-col>
                                         <v-text-field
-                                        v-model="vmp[i].day"                         
+                                        v-model="filterVmp[i].day"                         
                                         hint="YYYY-MM-DD"
                                         :rules="vcDay_rule"
                                         persistent-hint
@@ -144,7 +144,7 @@
                                         <v-col cols="auto" align-self="center">총 일수 :</v-col>
                                         <v-col>
                                         <v-select
-                                        v-model="vmp[i].termS"
+                                        v-model="filterVmp[i].termS"
                                         :items="termList.filter((el,index)=>{
                                             return index > 0
                                         })"
@@ -159,7 +159,7 @@
                                         <v-col cols="auto" align-self="center">사용한 일수 :</v-col>
                                         <v-col>
                                         <v-select
-                                        v-model="vmp[i].usedS"
+                                        v-model="filterVmp[i].usedS"
                                         :items="termList.filter((el,index)=>{
                                             return index <= vmp[i].termS.idx
                                         })"
