@@ -26,6 +26,7 @@ class UserShowView(APIView):
         serializer = UserDisplaySerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+'''
 def google_login_redirect(request):
     """
     Code Request
@@ -105,3 +106,4 @@ class UserGoogleCallbackView(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
     callback_url = GOOGLE_CALLBACK_URI
     client_class = OAuth2Client
+'''
