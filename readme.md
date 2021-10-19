@@ -136,7 +136,7 @@ $ npm run serve
 ### Back-End
 
 /sonagi/sonagi 폴더에 secret.json이 필요합니다.
-```
+```json
 # secret.json
 {
     "SECRET_KEY" : "[Personal_Secret_Key]",
@@ -146,7 +146,7 @@ $ npm run serve
 ```
 
 다음으로 /sonagi/sonagi/settings.py의 CORS_ORIGIN_WHITELIST를 다음과 같이 바꿔야 합니다.
-```
+```python
 CORS_ORIGIN_WHITELIST = [
     "[프론트엔드 URL]"
 ]
@@ -157,7 +157,7 @@ url은 http 또는 https로 시작하여, 슬래쉬(/) 없이 끝나야 합니�
 ### Front-End
 
 frontend/src/store/index.js에서 Vuex의 state를 다음과 같이 바꿔야 합니다.
-```
+```javascript
 export default new Vuex.Store({
   ...
   state: {
