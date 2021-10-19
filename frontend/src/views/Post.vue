@@ -167,7 +167,7 @@ export default {
           this.postData = res.data;
           let tmp = this.postData.write_date;
           tmp = tmp.split(".")[0];
-          this.postData.write_date = tmp.split("T")[0] + " " + tmp.split("T")[1];
+          this.postData.write_date = tmp.split("T")[0] + " " + tmp.split("T")[1].split('+')[0];
           if(this.postData.prev_id !== null){
             this.updatePrev(this.postData.prev_id);
           }
