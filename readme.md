@@ -2,6 +2,29 @@
 
 <img src="https://user-images.githubusercontent.com/33975225/133041510-963cf607-cd95-4348-b23b-7ad0da769835.png" alt="updraft2" style="zoom: 10%;" />
 
+
+## 목차
+
+- [☁️ SONAGI-ON_상승기류]
+  * [📖 프로젝트 소개](#-프로젝트-소개)
+  * [🔍 기능 설명](#-기능-설명)
+  * [🌞 기대 효과 및 전망](#-기대-효과-및-전망)
+  * [💻 구성 요건](#-구성-요건)
+  * [📜 기술 스택 (Technique Used)](#----------technique-used-)
+    + [Back-End](#back-end)
+    + [Front-End](#front-end)
+  * [💡 설치 안내 (Installation Process)](#----------installation-process-)
+    + [Back-End](#back-end-1)
+    + [Front-End](#front-end-1)
+  * [📱 프로젝트 사용법 (Getting Started)](#-------------getting-started-)
+    + [Back-End](#back-end-2)
+    + [Front-End](#front-end-2)
+  * [👯 팀 정보 (Team Information)](#---------team-information-)
+  * [🌱 저작권 및 사용권 정보 (Copyleft / End User License)](#-----------------copyleft---end-user-license-)
+
+
+
+
 ## 📖 프로젝트 소개
 
 - 기존 군에서는 소중한 나의 일기(소나기) 라는 군 생활 플래너를 장병들에게 제공 해오고 있습니다. 이는 단순한 일기장을 넘어서 자신의 군 생활에 대한 계획을 세우고, 이를 효과적으로 이끌어 나갈 수 있도록 도와주는 역할을 해 왔습니다. 하지만 현대 사회로 접어들면서, 이러한 아날로그 방식 보다는 스마트폰을 활용해 자신의 계획을 수립하고 기록을 남기는 사람들이 늘어났습니다. 군에서도 이에 발 맞춰, 스마트폰 보급이라는 사업의 효과성을 증대하기 위해 군 생활 플래너를 온라인 서비스로 제공하는 것을 제안합니다.
