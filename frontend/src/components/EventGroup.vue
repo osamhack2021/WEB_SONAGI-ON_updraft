@@ -57,7 +57,7 @@
                     <template v-slot:default>
                       <tbody>
                         <tr>
-                          <td width="90">일정</td>
+                          <td width="110">일정</td>
                           <td width="700">{{ contest[model].time }}</td>
                         </tr>
                         <tr>

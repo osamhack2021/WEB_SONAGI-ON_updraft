@@ -16,12 +16,12 @@
               <v-card
                 :color="active ? 'primary' : 'grey lighten-1'"
                 class="ma-4"
-                height="80"
-                width="220"
+                height="380"
+                width="280"
                 @click="toggle"
               >
                 <v-img
-                  height="80"
+                  height="380"
                   :src=item.img
                 ></v-img>
                 <v-row
@@ -57,7 +57,7 @@
                     <template v-slot:default>
                       <tbody>
                         <tr>
-                          <td width="70">주최</td>
+                          <td width="90">주최</td>
                           <td width="500">{{ contest[model].host }}</td>
                         </tr>
                         <tr>
@@ -93,7 +93,7 @@
           time: "2021.10.16 ~ 2021.10.19",
           host: "교육부, 시도교육청",
           link: "https://www.thinkcontest.com/Contest/ContestDetail.html?id=37770",
-          img: "https://www.thinkcontest.com/ufiles/contest/59b7e08f4ad92b95a41120c00503e1ddf6ec2755.png",
+          img: "https://www.thinkcontest.com/ufiles/contest/d4324b3837f24473ba81fceb879b2bf1196e2856.png",
         },
         {
           title: "(워크숍) 2021 차세대 해외 한국미술 큐레이터 워크숍 참가자 모집",
@@ -101,7 +101,7 @@
           time: "2021.10.12 ~ 2021.10.25",
           host: "한국국제교류재단",
           link: "https://www.thinkcontest.com/Contest/ContestDetail.html?id=37762",
-          img: "https://www.thinkcontest.com/ufiles/contest/8f35bd582956c7f1c9f6236c923381b9047c7dd8.jpg",
+          img: "https://www.thinkcontest.com/ufiles/contest/bc13106be7c524d0bfb677e3b4eb565f312e0d48.jpg",
         },
         {
           title: "2021년 노동존중 공모전",
@@ -109,7 +109,7 @@
           time: "2021.10.13 ~ 2021.10.29",
           host: "노동존중허브센터",
           link: "https://www.thinkcontest.com/Contest/ContestDetail.html?id=37744",
-          img: "https://www.thinkcontest.com/ufiles/contest/d39348c54ed82b2d46785420ed3871ba34f5c5e2.png",
+          img: "https://www.thinkcontest.com/ufiles/contest/c270f865208e20cbf259b2521e9ce48bae8b9411.jpg",
         },
         {
           title: "금천구와 함께하는 현직자 직무부트 캠프",
@@ -117,7 +117,7 @@
           time: "2021.10.01 ~ 2021.10.23",
           host: "금천구청",
           link: "https://www.thinkcontest.com/Contest/ContestDetail.html?id=37788",
-          img: "https://www.thinkcontest.com/ufiles/contest/de24a93e3ed37bba76771b25e60c493ef1b1f144.png",
+          img: "https://www.thinkcontest.com/ufiles/contest/6e4be753cc22b2c82452bbd81f214cf0de525fa4.png",
         },
         {
           title: "SID 잠실종합운동장 영상 공모전",
@@ -125,7 +125,7 @@
           time: "2021.10.15 ~ 2021.11.19",
           host: "서울특별시 균형발전본부 동남권사업과",
           link: "https://www.thinkcontest.com/Contest/ContestDetail.html?id=37682",
-          img: "https://www.thinkcontest.com/ufiles/contest/3dc98f8200e90855c77d0f6b2e327044cfcfc53d.png",
+          img: "https://www.thinkcontest.com/ufiles/contest/fc1b80b845d0fb3604f6538bafba92d6f3caf214.jpg",
         },
         {
           title: "2021년 국가연구시설장비 정책․제도 아이디어 및 ZEUS 홍보 콘텐츠 공모전",
@@ -133,7 +133,7 @@
           time: "2021.10.13 ~ 2021.11.09",
           host: "과학기술정보통신부",
           link: "https://www.thinkcontest.com/Contest/ContestDetail.html?id=37677",
-          img: "https://www.thinkcontest.com/ufiles/contest/a2a0c77d0ab70d9255975d7d5884d9094bf6295f.jpg",
+          img: "https://www.thinkcontest.com/ufiles/contest/af613454560b548202cfdf53d11f75c0df542cdd.png",
         },
         {
           title: "2021 연구실 안전 교육 콘텐츠 공모전 (접수기간 연장, ~ 10/22)",
@@ -141,7 +141,7 @@
           time: "2021.09.16 ~ 2021.10.22",
           host: "과학기술정보통신부, 국가연구안전관리본부",
           link: "https://www.thinkcontest.com/Contest/ContestDetail.html?id=36617",
-          img: "https://www.thinkcontest.com/ufiles/contest/d9f93c3c06cad9e24399db58a3faae64800ccdb2.jpg",
+          img: "https://www.thinkcontest.com/ufiles/contest/f354ac23cddec0fb97f94b360d756b6901559556.jpg",
         },
         {
           title: "내 손으로 만드는 공연예술창작산실 뉴 슬로건 공모전",
@@ -149,7 +149,7 @@
           time: "2021.10.13 ~ 2021.10.27",
           host: "한국문화예술위원회",
           link: "https://www.thinkcontest.com/Contest/ContestDetail.html?id=37645",
-          img: "https://www.thinkcontest.com/ufiles/contest/adfa26dccdbc20122440b564b0c945d5b1c550a8.png",
+          img: "https://www.thinkcontest.com/ufiles/contest/1ae34ca66abedfa110acfab7fa92d34befb310d5.png",
         },
       ],
     }),
