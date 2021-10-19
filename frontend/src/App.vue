@@ -73,8 +73,8 @@ export default {
       this.$store.dispatch('refresh');
     }
   },
-  created() {
-    this.$store.dispatch('refresh');
+  async created() {
+    await this.$store.dispatch('refresh');
   }
 };
 </script>
