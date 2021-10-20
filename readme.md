@@ -105,8 +105,7 @@ Nodejs >= 14.18.0
  -  vue animatednumbers
  -  vue chart.js
  -  vue alert
-
------------------------------------------------------------이하 추가 작성 예정-------------------------------------------------
+ 
 
 ## 💡 설치 안내 (Installation Process)
 
@@ -116,7 +115,7 @@ $ git clone https://github.com/osamhack2021/WEB_SONAGI-ON_updraft
 
 ### Back-End
 ```bash
-$ cd sonagi
+$ cd "WEB(BE)"
 $ python manage.py makemigrations community contest diary user usersetting vacation
 $ python manage.py migrate
 $ python manage.py createsuperuser # create super user account
@@ -125,7 +124,7 @@ $ python manage.py runserver 0.0.0.0:[PORT]
 
 ### Front-End
 ```bash
-$ cd frontend
+$ cd "WEB(FE)"
 $ npm install
 $ npm run serve
 ```
@@ -135,7 +134,7 @@ $ npm run serve
 
 ### Back-End
 
-/sonagi/sonagi 폴더에 secret.json이 필요합니다.
+/WEB(BE)/sonagi 폴더에 secret.json이 필요합니다.
 ```json
 # secret.json
 {
@@ -145,7 +144,7 @@ $ npm run serve
 } 
 ```
 
-다음으로 /sonagi/sonagi/settings.py의 CORS_ORIGIN_WHITELIST를 다음과 같이 바꿔야 합니다.
+다음으로 /WEB(BE)/sonagi/settings.py의 CORS_ORIGIN_WHITELIST를 다음과 같이 바꿔야 합니다.
 ```python
 CORS_ORIGIN_WHITELIST = [
     "[프론트엔드 URL]"
@@ -156,7 +155,7 @@ url은 http 또는 https로 시작하여, 슬래쉬(/) 없이 끝나야 합니�
 
 ### Front-End
 
-frontend/src/store/index.js에서 Vuex의 state를 다음과 같이 바꿔야 합니다.
+WEB(FE)/src/store/index.js에서 Vuex의 state를 다음과 같이 바꿔야 합니다.
 ```javascript
 export default new Vuex.Store({
   ...
