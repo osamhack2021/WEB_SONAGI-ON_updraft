@@ -1,7 +1,6 @@
 # ☁️ SONAGI-ON_상승기류
 
-<img src="https://user-images.githubusercontent.com/33975225/133041510-963cf607-cd95-4348-b23b-7ad0da769835.png" alt="updraft2" style="zoom: 10%;" />
-
+<p align="center"><img src="https://user-images.githubusercontent.com/33975225/138103010-c459dd45-77bc-48c4-89f6-c8aa6752658d.png"  width="210" height="120"/></p>
 
 ## 목차
 
