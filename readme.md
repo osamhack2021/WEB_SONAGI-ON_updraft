@@ -174,9 +174,9 @@ export default new Vuex.Store({
 
 ## 👯 팀 정보 (Team Information)
 
-- Jeong Jae hoon (jjh8501@gmail.com), Github Id: revlr
-- kook hyun ho (kookhh0827@gmail.com), Github Id: kookhh0827
-- Lee hyun su (masterpug99@gmail.com), Github Id: masterpug99
+- 육군 상병 정재훈 (jjh8501@gmail.com), Github Id: revlr
+- 육군 일병 국현호 (kookhh0827@gmail.com), Github Id: kookhh0827
+- 육군 병장 이현수 (masterpug99@gmail.com), Github Id: masterpug99
 
 
 
