@@ -1,28 +1,28 @@
 sonagi/secret.json
 
 # front-end ignore files
-frontend/.DS_Store
-frontend/node_modules
+WEB(FE)/.DS_Store
+WEB(FE)/node_modules
 /dist
 test
 
 # local env files
-frontend/.env.local
-frontend/.env.*.local
+WEB(FE)/.env.local
+WEB(FE)/.env.*.local
 
 # Log files
-frontend/npm-debug.log*
-frontend/yarn-debug.log*
-frontend/yarn-error.log*
-frontend/pnpm-debug.log*
+WEB(FE)/npm-debug.log*
+WEB(FE)/yarn-debug.log*
+WEB(FE)/yarn-error.log*
+WEB(FE)/pnpm-debug.log*
 
 # Editor directories and files
-frontend/.idea
-frontend/.vscode
-frontend/*.suo
-frontend/*.ntvs*
-frontend/*.njsproj
-frontend/*.sln
-frontend/*.sw?
+WEB(FE)/.idea
+WEB(FE)/.vscode
+WEB(FE)/*.suo
+WEB(FE)/*.ntvs*
+WEB(FE)/*.njsproj
+WEB(FE)/*.sln
+WEB(FE)/*.sw?
 
-frontend/yarn.lock
+WEB(FE)/yarn.lock
